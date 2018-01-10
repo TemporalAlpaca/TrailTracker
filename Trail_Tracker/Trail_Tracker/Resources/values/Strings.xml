@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Hello">Hello World, Click Me!</string>
+    <string name="app_name">Who\'s Home?</string>
+    <string name="url">"http://75.142.141.235:3000"</string>
+    <string name="default_web_client_id" translatable="false">whos-home-fcb1b</string>
+    <string name="gcm_defaultSenderId" translatable="false">162304156377</string>
+    <string name="firebase_database_url" translatable="false">https://whos-home-fcb1b.firebaseio.com</string>
+    <string name="google_app_id" translatable="false">1:162304156377:android:c5ec0cc6cd535e91</string>
+    <string name="google_api_key" translatable="false">AIzaSyCUU7AYlgARlaS8JhH48mPcXRhx01uc9AM</string>
+    <string name="google_storage_bucket" translatable="false">whos-home-fcb1b.appspot.com</string>
+</resources>

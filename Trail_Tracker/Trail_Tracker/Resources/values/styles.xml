@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="MyTheme" parent="@android:style/Theme.Material.Light">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+    <item name="android:colorPrimary">#0347b5</item> 
+    <item name="android:colorAccent">#0347b5</item>
+    <item name="android:actionBarStyle">@style/ToolBarStyle</item>
+  </style>
+  
+  <style name="ToolBarStyle" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+    <item name="android:minWidth">100dip</item>
+    <item name="android:padding">320dip</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="button_text" >
+    <item name="android:layout_width" >fill_parent</item>
+    <item name="android:layout_height" >wrap_content</item>
+    <item name="android:textColor" >#ffffff</item>
+    <item name="android:gravity" >center</item>
+    
+    <item name="android:textSize" >16dp</item>
+    <item name="android:textStyle" >bold</item>
+  </style>
+</resources>
