@@ -20,10 +20,10 @@ namespace TrailTracker
         TextView txtLongitude;
         LocationManager locMgr;
 
-        Tuple<double, double> startCoord;
-        Tuple<double, double> endCoord;
+        Location startCoord;
+        Location endCoord;
 
-        List<Tuple<double, double>> path = new List<Tuple<double, double>>();
+        List<Location> path = new List<Location>();
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -54,27 +54,30 @@ namespace TrailTracker
             txtLatitude.Text = loc.Latitude.ToString();
             txtLongitude.Text = loc.Longitude.ToString();
 
-            endCoord = new Tuple<double, double>(loc.Latitude, loc.Longitude);
+            endCoord = new Location(loc);
+            
             locMgr.RemoveUpdates(this);
 
-            string displayCoords = "Start Position:\nLatitude: " + startCoord.Item1.ToString();
+            string displayCoords = "Start Position:\nLatitude: " + startCoord.Latitude.ToString();
             displayCoords += "\nLongitude: ";
-            displayCoords += startCoord.Item2.ToString();
+            displayCoords += startCoord.Longitude.ToString();
             displayCoords += "\n";
 
-            foreach (Tuple<double, double> coord in path)
+            foreach (Location coord in path)
             {
                 displayCoords += "\nLatitude: ";
-                displayCoords += coord.Item1.ToString();
+                displayCoords += coord.Latitude.ToString();
                 displayCoords += "\nLongitude: ";
-                displayCoords += coord.Item2.ToString();
+                displayCoords += coord.Longitude.ToString();
                 displayCoords += "\n";
             }
             displayCoords += "\nEnd Position:";
             displayCoords += "\nLatitude: ";
-            displayCoords += endCoord.Item1.ToString();
+            displayCoords += endCoord.Latitude.ToString();
             displayCoords += "\nLongitude: ";
-            displayCoords += endCoord.Item2.ToString();
+            displayCoords += endCoord.Longitude.ToString();
+
+            displayCoords += "\n\nTotal Distance: " + CalcDistance().ToString() + " miles";
 
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.SetTitle("GPS Coordinates");
@@ -88,7 +91,6 @@ namespace TrailTracker
 
             Dialog dialog = alert.Create();
             dialog.Show();
-            //Toast.MakeText(this, displayCoords, ToastLength.Long).Show();
         }
 
         private void BtnStartTracking_Click(object sender, System.EventArgs e)
@@ -101,10 +103,11 @@ namespace TrailTracker
             txtLatitude.Text = "Latitude: " + loc.Latitude.ToString();
             txtLongitude.Text = "Longitude: " + loc.Longitude.ToString();
 
-            startCoord = new Tuple<double, double>(loc.Latitude, loc.Longitude);
+            startCoord = new Location(loc);
 
             try
             {
+                //Poll every 2000ms, when distance has changed more than 1 meter
                 locMgr.RequestLocationUpdates(Provider, 2000, 1, this);
                 if (path != null)
                     path.Clear();
@@ -123,7 +126,7 @@ namespace TrailTracker
             txtLatitude.Text = "Latitude: " + location.Latitude;
             txtLongitude.Text = "Longitude: " + location.Longitude;
 
-            path.Add(new Tuple<double, double>(location.Latitude, location.Longitude));
+            path.Add(new Location(location));
         }
 
         public void OnProviderDisabled(string provider)
@@ -142,6 +145,22 @@ namespace TrailTracker
         {
             base.OnPause();
             locMgr.RemoveUpdates(this);
+        }
+
+        protected double CalcDistance()
+        {
+            double distance = 0;
+
+            for(int i = 0; i < path.Count - 1; ++i)
+            {
+                //DistanceTo returns value in meters
+                distance += path[i].DistanceTo(path[i + 1]);
+            }
+
+            distance += path[path.Count - 1].DistanceTo(endCoord);
+
+            //convert meters to miles
+            return distance / 1609.344;
         }
     }
 }
