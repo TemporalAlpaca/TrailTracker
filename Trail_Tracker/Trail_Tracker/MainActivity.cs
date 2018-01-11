@@ -7,6 +7,7 @@ using Android.Content;
 using Android.Util;
 using Android.Runtime;
 using System;
+using System.Collections.Generic;
 
 namespace TrailTracker
 {
@@ -18,6 +19,11 @@ namespace TrailTracker
         TextView txtLatitude;
         TextView txtLongitude;
         LocationManager locMgr;
+
+        Tuple<double, double> startCoord;
+        Tuple<double, double> endCoord;
+
+        List<Tuple<double, double>> path = new List<Tuple<double, double>>();
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -40,7 +46,49 @@ namespace TrailTracker
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)
         {
-         
+            locMgr = GetSystemService(Context.LocationService) as LocationManager;
+            string Provider = LocationManager.GpsProvider;
+
+            Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
+
+            txtLatitude.Text = loc.Latitude.ToString();
+            txtLongitude.Text = loc.Longitude.ToString();
+
+            endCoord = new Tuple<double, double>(loc.Latitude, loc.Longitude);
+            locMgr.RemoveUpdates(this);
+
+            string displayCoords = "Start Position:\nLatitude: " + startCoord.Item1.ToString();
+            displayCoords += "\nLongitude: ";
+            displayCoords += startCoord.Item2.ToString();
+            displayCoords += "\n";
+
+            foreach (Tuple<double, double> coord in path)
+            {
+                displayCoords += "\nLatitude: ";
+                displayCoords += coord.Item1.ToString();
+                displayCoords += "\nLongitude: ";
+                displayCoords += coord.Item2.ToString();
+                displayCoords += "\n";
+            }
+            displayCoords += "\nEnd Position:";
+            displayCoords += "\nLatitude: ";
+            displayCoords += endCoord.Item1.ToString();
+            displayCoords += "\nLongitude: ";
+            displayCoords += endCoord.Item2.ToString();
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("GPS Coordinates");
+            alert.SetMessage(displayCoords);
+
+            alert.SetPositiveButton("Confirm", (senderAlert, args) => {
+            });
+
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+            });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
+            //Toast.MakeText(this, displayCoords, ToastLength.Long).Show();
         }
 
         private void BtnStartTracking_Click(object sender, System.EventArgs e)
@@ -50,24 +98,32 @@ namespace TrailTracker
 
             Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
 
-            txtLatitude.Text = loc.Latitude.ToString();
-            txtLongitude.Text = loc.Longitude.ToString();
-            if (locMgr.IsProviderEnabled(Provider))
+            txtLatitude.Text = "Latitude: " + loc.Latitude.ToString();
+            txtLongitude.Text = "Longitude: " + loc.Longitude.ToString();
+
+            startCoord = new Tuple<double, double>(loc.Latitude, loc.Longitude);
+
+            try
             {
-                //look at recording movements
-                //locMgr.RequestLocationUpdates(LocationManager.NetworkProvider, 1000, 100, this);
-                //locMgr.RequestLocationUpdates(Provider, 2000, 1, this);
+                locMgr.RequestLocationUpdates(Provider, 2000, 1, this);
+                if (path != null)
+                    path.Clear();
             }
-            else
-            {
-                Log.Info("GPS Start Error", Provider + " is not available. Does the device have location services enabled?");
-            }
+            catch(Exception)
+            {}
+
+        }
+
+        protected override void OnResume()
+        {
         }
 
         public void OnLocationChanged(Location location)
         {
             txtLatitude.Text = "Latitude: " + location.Latitude;
             txtLongitude.Text = "Longitude: " + location.Longitude;
+
+            path.Add(new Tuple<double, double>(location.Latitude, location.Longitude));
         }
 
         public void OnProviderDisabled(string provider)
