@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using Trail_Tracker;
 using Android.Locations;
 using Android.Content;
 using Android.Util;
@@ -9,9 +8,10 @@ using Android.Runtime;
 using System;
 using System.Collections.Generic;
 
-namespace TrailTracker
+namespace Trail_Tracker
 {
     [Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/icon")]
+    //[Activity(Label = "TrailTracker")]
     public class MainActivity : Activity, ILocationListener
     {
         Button btnStartTracking;
@@ -117,10 +117,6 @@ namespace TrailTracker
 
         }
 
-        protected override void OnResume()
-        {
-        }
-
         public void OnLocationChanged(Location location)
         {
             txtLatitude.Text = "Latitude: " + location.Latitude;
@@ -141,26 +137,26 @@ namespace TrailTracker
         {
         }
 
-        protected override void OnPause()
-        {
-            base.OnPause();
-            locMgr.RemoveUpdates(this);
-        }
-
         protected double CalcDistance()
         {
             double distance = 0;
 
-            for(int i = 0; i < path.Count - 1; ++i)
+            if (path.Count > 0)
             {
-                //DistanceTo returns value in meters
-                distance += path[i].DistanceTo(path[i + 1]);
+
+                for (int i = 0; i < path.Count - 1; ++i)
+                {
+                    //DistanceTo returns value in meters
+                    distance += path[i].DistanceTo(path[i + 1]);
+                }
+
+                distance += path[path.Count - 1].DistanceTo(endCoord);
+
+                //convert meters to miles
+                return distance / 1609.344;
             }
-
-            distance += path[path.Count - 1].DistanceTo(endCoord);
-
-            //convert meters to miles
-            return distance / 1609.344;
+            else
+                return 0;
         }
     }
 }
