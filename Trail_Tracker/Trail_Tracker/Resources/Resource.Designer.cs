@@ -31,50 +31,119 @@ namespace Trail_Tracker
 		public partial class Attribute
 		{
 			
-			// aapt resource value: 0x7f010003
-			public const int buttonSize = 2130771971;
+			// aapt resource value: 0x7f010010
+			public const int ambientEnabled = 2130771984;
 			
-			// aapt resource value: 0x7f010002
-			public const int circleCrop = 2130771970;
-			
-			// aapt resource value: 0x7f010004
-			public const int colorScheme = 2130771972;
-			
-			// aapt resource value: 0x7f01000d
-			public const int font = 2130771981;
-			
-			// aapt resource value: 0x7f010006
-			public const int fontProviderAuthority = 2130771974;
-			
-			// aapt resource value: 0x7f010009
-			public const int fontProviderCerts = 2130771977;
-			
-			// aapt resource value: 0x7f01000a
-			public const int fontProviderFetchStrategy = 2130771978;
-			
-			// aapt resource value: 0x7f01000b
-			public const int fontProviderFetchTimeout = 2130771979;
-			
-			// aapt resource value: 0x7f010007
-			public const int fontProviderPackage = 2130771975;
-			
-			// aapt resource value: 0x7f010008
-			public const int fontProviderQuery = 2130771976;
-			
-			// aapt resource value: 0x7f01000c
-			public const int fontStyle = 2130771980;
-			
-			// aapt resource value: 0x7f01000e
-			public const int fontWeight = 2130771982;
+			// aapt resource value: 0x7f01001a
+			public const int buttonSize = 2130771994;
 			
 			// aapt resource value: 0x7f010001
-			public const int imageAspectRatio = 2130771969;
+			public const int cameraBearing = 2130771969;
 			
-			// aapt resource value: 0x7f010000
-			public const int imageAspectRatioAdjust = 2130771968;
+			// aapt resource value: 0x7f010012
+			public const int cameraMaxZoomPreference = 2130771986;
+			
+			// aapt resource value: 0x7f010011
+			public const int cameraMinZoomPreference = 2130771985;
+			
+			// aapt resource value: 0x7f010002
+			public const int cameraTargetLat = 2130771970;
+			
+			// aapt resource value: 0x7f010003
+			public const int cameraTargetLng = 2130771971;
+			
+			// aapt resource value: 0x7f010004
+			public const int cameraTilt = 2130771972;
 			
 			// aapt resource value: 0x7f010005
-			public const int scopeUris = 2130771973;
+			public const int cameraZoom = 2130771973;
+			
+			// aapt resource value: 0x7f010019
+			public const int circleCrop = 2130771993;
+			
+			// aapt resource value: 0x7f01001b
+			public const int colorScheme = 2130771995;
+			
+			// aapt resource value: 0x7f010024
+			public const int font = 2130772004;
+			
+			// aapt resource value: 0x7f01001d
+			public const int fontProviderAuthority = 2130771997;
+			
+			// aapt resource value: 0x7f010020
+			public const int fontProviderCerts = 2130772000;
+			
+			// aapt resource value: 0x7f010021
+			public const int fontProviderFetchStrategy = 2130772001;
+			
+			// aapt resource value: 0x7f010022
+			public const int fontProviderFetchTimeout = 2130772002;
+			
+			// aapt resource value: 0x7f01001e
+			public const int fontProviderPackage = 2130771998;
+			
+			// aapt resource value: 0x7f01001f
+			public const int fontProviderQuery = 2130771999;
+			
+			// aapt resource value: 0x7f010023
+			public const int fontStyle = 2130772003;
+			
+			// aapt resource value: 0x7f010025
+			public const int fontWeight = 2130772005;
+			
+			// aapt resource value: 0x7f010018
+			public const int imageAspectRatio = 2130771992;
+			
+			// aapt resource value: 0x7f010017
+			public const int imageAspectRatioAdjust = 2130771991;
+			
+			// aapt resource value: 0x7f010015
+			public const int latLngBoundsNorthEastLatitude = 2130771989;
+			
+			// aapt resource value: 0x7f010016
+			public const int latLngBoundsNorthEastLongitude = 2130771990;
+			
+			// aapt resource value: 0x7f010013
+			public const int latLngBoundsSouthWestLatitude = 2130771987;
+			
+			// aapt resource value: 0x7f010014
+			public const int latLngBoundsSouthWestLongitude = 2130771988;
+			
+			// aapt resource value: 0x7f010006
+			public const int liteMode = 2130771974;
+			
+			// aapt resource value: 0x7f010000
+			public const int mapType = 2130771968;
+			
+			// aapt resource value: 0x7f01001c
+			public const int scopeUris = 2130771996;
+			
+			// aapt resource value: 0x7f010007
+			public const int uiCompass = 2130771975;
+			
+			// aapt resource value: 0x7f01000f
+			public const int uiMapToolbar = 2130771983;
+			
+			// aapt resource value: 0x7f010008
+			public const int uiRotateGestures = 2130771976;
+			
+			// aapt resource value: 0x7f010009
+			public const int uiScrollGestures = 2130771977;
+			
+			// aapt resource value: 0x7f01000a
+			public const int uiTiltGestures = 2130771978;
+			
+			// aapt resource value: 0x7f01000b
+			public const int uiZoomControls = 2130771979;
+			
+			// aapt resource value: 0x7f01000c
+			public const int uiZoomGestures = 2130771980;
+			
+			// aapt resource value: 0x7f01000d
+			public const int useViewLifecycle = 2130771981;
+			
+			// aapt resource value: 0x7f01000e
+			public const int zOrderOnTop = 2130771982;
 			
 			static Attribute()
 			{
@@ -420,77 +489,83 @@ namespace Trail_Tracker
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a001c
-			public const int action0 = 2131361820;
-			
-			// aapt resource value: 0x7f0a0019
-			public const int action_container = 2131361817;
-			
 			// aapt resource value: 0x7f0a0020
-			public const int action_divider = 2131361824;
-			
-			// aapt resource value: 0x7f0a001a
-			public const int action_image = 2131361818;
-			
-			// aapt resource value: 0x7f0a001b
-			public const int action_text = 2131361819;
-			
-			// aapt resource value: 0x7f0a002a
-			public const int actions = 2131361834;
-			
-			// aapt resource value: 0x7f0a0005
-			public const int adjust_height = 2131361797;
-			
-			// aapt resource value: 0x7f0a0006
-			public const int adjust_width = 2131361798;
-			
-			// aapt resource value: 0x7f0a000e
-			public const int async = 2131361806;
-			
-			// aapt resource value: 0x7f0a000b
-			public const int auto = 2131361803;
-			
-			// aapt resource value: 0x7f0a000f
-			public const int blocking = 2131361807;
-			
-			// aapt resource value: 0x7f0a0014
-			public const int btnStartTracking = 2131361812;
-			
-			// aapt resource value: 0x7f0a0017
-			public const int btnStopTracking = 2131361815;
+			public const int action0 = 2131361824;
 			
 			// aapt resource value: 0x7f0a001d
-			public const int cancel_action = 2131361821;
+			public const int action_container = 2131361821;
 			
-			// aapt resource value: 0x7f0a0025
-			public const int chronometer = 2131361829;
+			// aapt resource value: 0x7f0a0024
+			public const int action_divider = 2131361828;
 			
-			// aapt resource value: 0x7f0a000c
-			public const int dark = 2131361804;
+			// aapt resource value: 0x7f0a001e
+			public const int action_image = 2131361822;
 			
-			// aapt resource value: 0x7f0a002c
-			public const int end_padder = 2131361836;
+			// aapt resource value: 0x7f0a001f
+			public const int action_text = 2131361823;
+			
+			// aapt resource value: 0x7f0a002e
+			public const int actions = 2131361838;
+			
+			// aapt resource value: 0x7f0a000a
+			public const int adjust_height = 2131361802;
+			
+			// aapt resource value: 0x7f0a000b
+			public const int adjust_width = 2131361803;
+			
+			// aapt resource value: 0x7f0a0012
+			public const int async = 2131361810;
+			
+			// aapt resource value: 0x7f0a000f
+			public const int auto = 2131361807;
+			
+			// aapt resource value: 0x7f0a0013
+			public const int blocking = 2131361811;
+			
+			// aapt resource value: 0x7f0a0017
+			public const int btnStartTracking = 2131361815;
+			
+			// aapt resource value: 0x7f0a001a
+			public const int btnStopTracking = 2131361818;
+			
+			// aapt resource value: 0x7f0a001b
+			public const int btnTestMap = 2131361819;
+			
+			// aapt resource value: 0x7f0a0021
+			public const int cancel_action = 2131361825;
+			
+			// aapt resource value: 0x7f0a0029
+			public const int chronometer = 2131361833;
 			
 			// aapt resource value: 0x7f0a0010
-			public const int forever = 2131361808;
+			public const int dark = 2131361808;
 			
-			// aapt resource value: 0x7f0a0027
-			public const int icon = 2131361831;
+			// aapt resource value: 0x7f0a0030
+			public const int end_padder = 2131361840;
+			
+			// aapt resource value: 0x7f0a0014
+			public const int forever = 2131361812;
+			
+			// aapt resource value: 0x7f0a0005
+			public const int hybrid = 2131361797;
 			
 			// aapt resource value: 0x7f0a002b
-			public const int icon_group = 2131361835;
+			public const int icon = 2131361835;
 			
-			// aapt resource value: 0x7f0a0008
-			public const int icon_only = 2131361800;
+			// aapt resource value: 0x7f0a002f
+			public const int icon_group = 2131361839;
 			
-			// aapt resource value: 0x7f0a0026
-			public const int info = 2131361830;
+			// aapt resource value: 0x7f0a000c
+			public const int icon_only = 2131361804;
+			
+			// aapt resource value: 0x7f0a002a
+			public const int info = 2131361834;
+			
+			// aapt resource value: 0x7f0a0015
+			public const int italic = 2131361813;
 			
 			// aapt resource value: 0x7f0a0011
-			public const int italic = 2131361809;
-			
-			// aapt resource value: 0x7f0a000d
-			public const int light = 2131361805;
+			public const int light = 2131361809;
 			
 			// aapt resource value: 0x7f0a0000
 			public const int line1 = 2131361792;
@@ -498,38 +573,44 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0001
 			public const int line3 = 2131361793;
 			
-			// aapt resource value: 0x7f0a0018
-			public const int map = 2131361816;
-			
-			// aapt resource value: 0x7f0a001f
-			public const int media_actions = 2131361823;
-			
-			// aapt resource value: 0x7f0a0007
-			public const int none = 2131361799;
-			
-			// aapt resource value: 0x7f0a0012
-			public const int normal = 2131361810;
-			
-			// aapt resource value: 0x7f0a0029
-			public const int notification_background = 2131361833;
-			
-			// aapt resource value: 0x7f0a0022
-			public const int notification_main_column = 2131361826;
-			
-			// aapt resource value: 0x7f0a0021
-			public const int notification_main_column_container = 2131361825;
-			
-			// aapt resource value: 0x7f0a0028
-			public const int right_icon = 2131361832;
+			// aapt resource value: 0x7f0a001c
+			public const int map = 2131361820;
 			
 			// aapt resource value: 0x7f0a0023
-			public const int right_side = 2131361827;
+			public const int media_actions = 2131361827;
+			
+			// aapt resource value: 0x7f0a0006
+			public const int none = 2131361798;
+			
+			// aapt resource value: 0x7f0a0007
+			public const int normal = 2131361799;
+			
+			// aapt resource value: 0x7f0a002d
+			public const int notification_background = 2131361837;
+			
+			// aapt resource value: 0x7f0a0026
+			public const int notification_main_column = 2131361830;
+			
+			// aapt resource value: 0x7f0a0025
+			public const int notification_main_column_container = 2131361829;
+			
+			// aapt resource value: 0x7f0a002c
+			public const int right_icon = 2131361836;
+			
+			// aapt resource value: 0x7f0a0027
+			public const int right_side = 2131361831;
+			
+			// aapt resource value: 0x7f0a0008
+			public const int satellite = 2131361800;
+			
+			// aapt resource value: 0x7f0a000d
+			public const int standard = 2131361805;
+			
+			// aapt resource value: 0x7f0a0022
+			public const int status_bar_latest_event_content = 2131361826;
 			
 			// aapt resource value: 0x7f0a0009
-			public const int standard = 2131361801;
-			
-			// aapt resource value: 0x7f0a001e
-			public const int status_bar_latest_event_content = 2131361822;
+			public const int terrain = 2131361801;
 			
 			// aapt resource value: 0x7f0a0002
 			public const int text = 2131361794;
@@ -537,23 +618,23 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0003
 			public const int text2 = 2131361795;
 			
-			// aapt resource value: 0x7f0a0013
-			public const int textTrailTrackerHeader = 2131361811;
+			// aapt resource value: 0x7f0a0016
+			public const int textTrailTrackerHeader = 2131361814;
 			
-			// aapt resource value: 0x7f0a0024
-			public const int time = 2131361828;
+			// aapt resource value: 0x7f0a0028
+			public const int time = 2131361832;
 			
 			// aapt resource value: 0x7f0a0004
 			public const int title = 2131361796;
 			
-			// aapt resource value: 0x7f0a0015
-			public const int txtLatitude = 2131361813;
+			// aapt resource value: 0x7f0a0018
+			public const int txtLatitude = 2131361816;
 			
-			// aapt resource value: 0x7f0a0016
-			public const int txtLongitude = 2131361814;
+			// aapt resource value: 0x7f0a0019
+			public const int txtLongitude = 2131361817;
 			
-			// aapt resource value: 0x7f0a000a
-			public const int wide = 2131361802;
+			// aapt resource value: 0x7f0a000e
+			public const int wide = 2131361806;
 			
 			static Id()
 			{
@@ -804,12 +885,12 @@ namespace Trail_Tracker
 		{
 			
 			public static int[] FontFamily = new int[] {
-					2130771974,
-					2130771975,
-					2130771976,
-					2130771977,
-					2130771978,
-					2130771979};
+					2130771997,
+					2130771998,
+					2130771999,
+					2130772000,
+					2130772001,
+					2130772002};
 			
 			// aapt resource value: 0
 			public const int FontFamily_fontProviderAuthority = 0;
@@ -830,9 +911,9 @@ namespace Trail_Tracker
 			public const int FontFamily_fontProviderQuery = 2;
 			
 			public static int[] FontFamilyFont = new int[] {
-					2130771980,
-					2130771981,
-					2130771982};
+					2130772003,
+					2130772004,
+					2130772005};
 			
 			// aapt resource value: 1
 			public const int FontFamilyFont_font = 1;
@@ -844,9 +925,9 @@ namespace Trail_Tracker
 			public const int FontFamilyFont_fontWeight = 2;
 			
 			public static int[] LoadingImageView = new int[] {
-					2130771968,
-					2130771969,
-					2130771970};
+					2130771991,
+					2130771992,
+					2130771993};
 			
 			// aapt resource value: 2
 			public const int LoadingImageView_circleCrop = 2;
@@ -857,10 +938,104 @@ namespace Trail_Tracker
 			// aapt resource value: 0
 			public const int LoadingImageView_imageAspectRatioAdjust = 0;
 			
-			public static int[] SignInButton = new int[] {
+			public static int[] MapAttrs = new int[] {
+					2130771968,
+					2130771969,
+					2130771970,
 					2130771971,
 					2130771972,
-					2130771973};
+					2130771973,
+					2130771974,
+					2130771975,
+					2130771976,
+					2130771977,
+					2130771978,
+					2130771979,
+					2130771980,
+					2130771981,
+					2130771982,
+					2130771983,
+					2130771984,
+					2130771985,
+					2130771986,
+					2130771987,
+					2130771988,
+					2130771989,
+					2130771990};
+			
+			// aapt resource value: 16
+			public const int MapAttrs_ambientEnabled = 16;
+			
+			// aapt resource value: 1
+			public const int MapAttrs_cameraBearing = 1;
+			
+			// aapt resource value: 18
+			public const int MapAttrs_cameraMaxZoomPreference = 18;
+			
+			// aapt resource value: 17
+			public const int MapAttrs_cameraMinZoomPreference = 17;
+			
+			// aapt resource value: 2
+			public const int MapAttrs_cameraTargetLat = 2;
+			
+			// aapt resource value: 3
+			public const int MapAttrs_cameraTargetLng = 3;
+			
+			// aapt resource value: 4
+			public const int MapAttrs_cameraTilt = 4;
+			
+			// aapt resource value: 5
+			public const int MapAttrs_cameraZoom = 5;
+			
+			// aapt resource value: 21
+			public const int MapAttrs_latLngBoundsNorthEastLatitude = 21;
+			
+			// aapt resource value: 22
+			public const int MapAttrs_latLngBoundsNorthEastLongitude = 22;
+			
+			// aapt resource value: 19
+			public const int MapAttrs_latLngBoundsSouthWestLatitude = 19;
+			
+			// aapt resource value: 20
+			public const int MapAttrs_latLngBoundsSouthWestLongitude = 20;
+			
+			// aapt resource value: 6
+			public const int MapAttrs_liteMode = 6;
+			
+			// aapt resource value: 0
+			public const int MapAttrs_mapType = 0;
+			
+			// aapt resource value: 7
+			public const int MapAttrs_uiCompass = 7;
+			
+			// aapt resource value: 15
+			public const int MapAttrs_uiMapToolbar = 15;
+			
+			// aapt resource value: 8
+			public const int MapAttrs_uiRotateGestures = 8;
+			
+			// aapt resource value: 9
+			public const int MapAttrs_uiScrollGestures = 9;
+			
+			// aapt resource value: 10
+			public const int MapAttrs_uiTiltGestures = 10;
+			
+			// aapt resource value: 11
+			public const int MapAttrs_uiZoomControls = 11;
+			
+			// aapt resource value: 12
+			public const int MapAttrs_uiZoomGestures = 12;
+			
+			// aapt resource value: 13
+			public const int MapAttrs_useViewLifecycle = 13;
+			
+			// aapt resource value: 14
+			public const int MapAttrs_zOrderOnTop = 14;
+			
+			public static int[] SignInButton = new int[] {
+					2130771994,
+					2130771995,
+					2130771996};
 			
 			// aapt resource value: 0
 			public const int SignInButton_buttonSize = 0;

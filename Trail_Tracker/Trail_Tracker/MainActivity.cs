@@ -7,6 +7,10 @@ using Android.Util;
 using Android.Runtime;
 using System;
 using System.Collections.Generic;
+using Android.Support.V4.Content;
+using Android.Support.V4.App;
+using Android;
+using Android.Content.PM;
 
 namespace Trail_Tracker
 {
@@ -16,6 +20,8 @@ namespace Trail_Tracker
     {
         Button btnStartTracking;
         Button btnStopTracking;
+        Button btnTestMap;
+  
         TextView txtLatitude;
         TextView txtLongitude;
         LocationManager locMgr;
@@ -40,8 +46,16 @@ namespace Trail_Tracker
             btnStopTracking = FindViewById<Button>(Resource.Id.btnStopTracking);
             btnStopTracking.Click += BtnStopTracking_Click;
 
+            btnTestMap = FindViewById<Button>(Resource.Id.btnTestMap);
+            btnTestMap.Click += BtnTestMap_Click;
+
             txtLatitude = FindViewById<TextView>(Resource.Id.txtLatitude);
             txtLongitude = FindViewById<TextView>(Resource.Id.txtLongitude);
+        }
+
+        private void BtnTestMap_Click(object sender, EventArgs e)
+        {
+            this.StartActivity(typeof(MapActivity));
         }
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)
@@ -95,26 +109,42 @@ namespace Trail_Tracker
 
         private void BtnStartTracking_Click(object sender, System.EventArgs e)
         {
-            locMgr = GetSystemService(Context.LocationService) as LocationManager;
-            string Provider = LocationManager.GpsProvider;
-
-            Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
-
-            txtLatitude.Text = "Latitude: " + loc.Latitude.ToString();
-            txtLongitude.Text = "Longitude: " + loc.Longitude.ToString();
-
-            startCoord = new Location(loc);
-
-            try
+            string permission = Manifest.Permission.AccessFineLocation;
+            if (this.CheckSelfPermission(permission) == (int)Permission.Granted)
             {
-                //Poll every 2000ms, when distance has changed more than 1 meter
-                locMgr.RequestLocationUpdates(Provider, 2000, 1, this);
-                if (path != null)
-                    path.Clear();
-            }
-            catch(Exception)
-            {}
+                locMgr = GetSystemService(Context.LocationService) as LocationManager;
+                string Provider = LocationManager.GpsProvider;
+                Location loc;
+                try
+                {
+                    loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
+                    txtLatitude.Text = "Latitude: " + loc.Latitude.ToString();
+                    txtLongitude.Text = "Longitude: " + loc.Longitude.ToString();
 
+                    startCoord = new Location(loc);
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex.ToString());
+                }
+
+
+                try
+                {
+                    //Poll every 2000ms, when distance has changed more than 1 meter
+                    locMgr.RequestLocationUpdates(Provider, 2000, 1, this);
+                    if (path != null)
+                        path.Clear();
+                }
+                catch (Exception)
+                { }
+            }
+            else
+            {
+                string[] request_permissions = new string[1];
+                request_permissions[0] = Manifest.Permission.AccessFineLocation;
+                ActivityCompat.RequestPermissions(this, request_permissions, 0);
+            }
         }
 
         public void OnLocationChanged(Location location)
@@ -140,16 +170,13 @@ namespace Trail_Tracker
         protected double CalcDistance()
         {
             double distance = 0;
-
             if (path.Count > 0)
             {
-
                 for (int i = 0; i < path.Count - 1; ++i)
                 {
                     //DistanceTo returns value in meters
                     distance += path[i].DistanceTo(path[i + 1]);
                 }
-
                 distance += path[path.Count - 1].DistanceTo(endCoord);
 
                 //convert meters to miles

@@ -27,7 +27,7 @@
         android:layout_marginLeft="15px"
         android:layout_marginRight="15px"
         android:textSize="15sp" />
-<TextView
+    <TextView
         android:text="Latitude:"
         android:layout_width="match_parent"
         android:layout_weight="20"
@@ -37,8 +37,7 @@
         android:id="@+id/txtLatitude"
         android:textStyle="bold"
         android:textSize="26sp" />
-  
-  <TextView
+    <TextView
         android:text="Longitude:"
         android:layout_width="match_parent"
         android:layout_weight="20"
@@ -48,7 +47,6 @@
         android:id="@+id/txtLongitude"
         android:textStyle="bold"
         android:textSize="26sp" />
-  
     <Button
         android:background="@drawable/blue_button"
         style="@style/button_text"
@@ -59,6 +57,18 @@
         android:id="@+id/btnStopTracking"
         android:layout_marginLeft="15px"
         android:layout_marginRight="15px"
+        android:textSize="15sp" />
+  <Button
+        android:background="@drawable/blue_button"
+        style="@style/button_text"
+        android:text="TestMap"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:id="@+id/btnTestMap"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        android:layout_marginTop="15px"
         android:textSize="15sp" />
 <!--BUTTON ONLY USED FOR TESTING
     <Button
