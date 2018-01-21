@@ -11,6 +11,7 @@ using Android.Support.V4.Content;
 using Android.Support.V4.App;
 using Android;
 using Android.Content.PM;
+using Trail_Tracker.Helpers;
 
 namespace Trail_Tracker
 {
@@ -61,7 +62,7 @@ namespace Trail_Tracker
         private void BtnStopTracking_Click(object sender, System.EventArgs e)
         {
             locMgr = GetSystemService(Context.LocationService) as LocationManager;
-            string Provider = LocationManager.GpsProvider;
+            float length = 0;
 
             Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
 
@@ -91,13 +92,16 @@ namespace Trail_Tracker
             displayCoords += "\nLongitude: ";
             displayCoords += endCoord.Longitude.ToString();
 
-            displayCoords += "\n\nTotal Distance: " + CalcDistance().ToString() + " miles";
+            length = CalcDistance();
+            displayCoords += "\n\nTotal Distance: " + length.ToString() + " miles";
 
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.SetTitle("GPS Coordinates");
             alert.SetMessage(displayCoords);
 
             alert.SetPositiveButton("Confirm", (senderAlert, args) => {
+                InsertTrail("Sample", length, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
+                    endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), "", "Caleb");
             });
 
             alert.SetNegativeButton("Cancel", (senderAlert, args) => {
@@ -105,6 +109,14 @@ namespace Trail_Tracker
 
             Dialog dialog = alert.Create();
             dialog.Show();
+        }
+
+        private void InsertTrail(string name, float length, string start, string end, string path, string username)
+        {
+            //Handle translating path values
+
+            DataAccess dataAccess = new DataAccess();
+            dataAccess.Insert_Trail(name, length, start, end, path, username);
         }
 
         private void BtnStartTracking_Click(object sender, System.EventArgs e)
@@ -167,9 +179,9 @@ namespace Trail_Tracker
         {
         }
 
-        protected double CalcDistance()
+        protected float CalcDistance()
         {
-            double distance = 0;
+            float distance = 0;
             if (path.Count > 0)
             {
                 for (int i = 0; i < path.Count - 1; ++i)
@@ -180,7 +192,7 @@ namespace Trail_Tracker
                 distance += path[path.Count - 1].DistanceTo(endCoord);
 
                 //convert meters to miles
-                return distance / 1609.344;
+                return distance / (float)1609.344;
             }
             else
                 return 0;
