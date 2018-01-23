@@ -56,7 +56,9 @@ namespace Trail_Tracker
 
         private void BtnTestMap_Click(object sender, EventArgs e)
         {
-            this.StartActivity(typeof(MapActivity));
+            DataAccess da = new DataAccess();
+            da.Search_Trail("Sample", 0, "", "");
+            //this.StartActivity(typeof(MapActivity));
         }
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)

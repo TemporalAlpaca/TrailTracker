@@ -47,5 +47,38 @@ namespace Trail_Tracker.Helpers
             }
             return true;
         }
+
+        public bool Search_Trail(string name, float length, string start, string username)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SEARCH_TRAIL", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = name;
+                        cmd.Parameters.Add("@LENGTH", SqlDbType.Float).Value = length;
+                        cmd.Parameters.Add("@START", SqlDbType.Text).Value = start;
+                        cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = username;
+
+                        con.Open();
+                        //cmd.ExecuteNonQuery();
+                        DataSet ds = new DataSet("SearchResults");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            return true;
+        }
     }
 }
