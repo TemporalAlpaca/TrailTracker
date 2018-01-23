@@ -56,9 +56,9 @@ namespace Trail_Tracker
 
         private void BtnTestMap_Click(object sender, EventArgs e)
         {
-            DataAccess da = new DataAccess();
-            da.Search_Trail("Sample", 0, "", "");
-            //this.StartActivity(typeof(MapActivity));
+            //DataAccess da = new DataAccess();
+            // da.Search_Trail("Sample", 0, "", "");
+            this.StartActivity(typeof(MapActivity));
         }
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)
@@ -103,7 +103,7 @@ namespace Trail_Tracker
 
             alert.SetPositiveButton("Confirm", (senderAlert, args) => {
                 InsertTrail("Sample", length, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
-                    endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), "", "Caleb");
+                    endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), path, "Caleb");
             });
 
             alert.SetNegativeButton("Cancel", (senderAlert, args) => {
@@ -113,12 +113,23 @@ namespace Trail_Tracker
             dialog.Show();
         }
 
-        private void InsertTrail(string name, float length, string start, string end, string path, string username)
+        private void InsertTrail(string name, float length, string start, string end, List<Location> path, string username)
         {
             //Handle translating path values
+            string coordinates = "";
+
+            foreach (Location coord in path)
+            {
+                if (coordinates != "")
+                    coordinates += ";";
+
+                coordinates += coord.Latitude.ToString();
+                coordinates += ",";
+                coordinates += coord.Longitude.ToString();
+            }
 
             DataAccess dataAccess = new DataAccess();
-            dataAccess.Insert_Trail(name, length, start, end, path, username);
+            dataAccess.Insert_Trail(name, length, start, end, coordinates, username);
         }
 
         private void BtnStartTracking_Click(object sender, System.EventArgs e)

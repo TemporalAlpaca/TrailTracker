@@ -48,7 +48,7 @@ namespace Trail_Tracker.Helpers
             return true;
         }
 
-        public bool Search_Trail(string name, float length, string start, string username)
+        public DataTable Search_Trail(string name, float length, string start, string username)
         {
             try
             {
@@ -64,21 +64,20 @@ namespace Trail_Tracker.Helpers
                         cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = username;
 
                         con.Open();
-                        //cmd.ExecuteNonQuery();
                         DataSet ds = new DataSet("SearchResults");
                         SqlDataAdapter da = new SqlDataAdapter();
                         da.SelectCommand = cmd;
 
                         da.Fill(ds);
+                        return ds.Tables[0];
                     }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return false;
+                return null;
             }
-            return true;
         }
     }
 }
