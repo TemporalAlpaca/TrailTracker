@@ -18,6 +18,8 @@ using Android.Gms.Maps.Model;
 using Android.Locations;
 using Android;
 using Android.Content.PM;
+using Trail_Tracker.Helpers;
+using System.Data;
 
 namespace Trail_Tracker
 {
@@ -32,6 +34,7 @@ namespace Trail_Tracker
         {
             _map = googleMap;
             SetCamera();
+            LoadTrails();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -51,7 +54,7 @@ namespace Trail_Tracker
             if (_mapFragment == null)
             {
                 GoogleMapOptions mapOptions = new GoogleMapOptions()
-                    .InvokeMapType(GoogleMap.MapTypeHybrid)
+                    .InvokeMapType(GoogleMap.MapTypeTerrain)
                     .InvokeZoomControlsEnabled(false)
                     .InvokeCompassEnabled(true);
 
@@ -72,7 +75,7 @@ namespace Trail_Tracker
             {
                 CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
                 builder.Target(location);
-                builder.Zoom(18);
+                builder.Zoom(15);
                 builder.Bearing(155);
                 CameraPosition cameraPosition = builder.Build();
                 CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
@@ -80,6 +83,51 @@ namespace Trail_Tracker
                 if (_map != null)
                 {
                     _map.MoveCamera(cameraUpdate);
+                }
+            }
+        }
+
+        private void LoadTrails()
+        {
+            DataAccess da = new DataAccess();
+            DataTable dt = da.Search_Trail("Sample", 0, "", "");
+
+            foreach(DataRow row in dt.Rows)
+            {
+                if (_map != null)
+                {
+                    //Separate latitude and longitude
+                    string[] startCoord = row.ItemArray[3].ToString().Split(',');
+                    double startLat = -1;
+                    double startLng = -1;
+                    try
+                    {
+                        startLat = double.Parse(startCoord[0]);
+                        startLng = double.Parse(startCoord[1]);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine("Failed to parse start coordinates for a trail: MapActivity line 105");
+                        Console.WriteLine(ex.ToString());
+                    }
+
+                    if (startLat != -1 && startLng != -1)
+                    {
+                        LatLngBounds bounds = _map.Projection.VisibleRegion.LatLngBounds;
+                        LatLng trailhead = new LatLng(startLat, startLng);
+
+                        //Load trails if they are in bounds of the zoom level
+                        if (bounds.Contains(trailhead))
+                        {
+                            MarkerOptions markerOpt1 = new MarkerOptions();
+                            markerOpt1.SetPosition(trailhead);
+                            //Set title to the trail's name
+                            markerOpt1.SetTitle("Name: " + row.ItemArray[1].ToString() + 
+                                " Length: " + row.ItemArray[2].ToString().Substring(0,4) + " miles");
+                            markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
+                            _map.AddMarker(markerOpt1);
+                        }
+                    }
                 }
             }
         }
