@@ -15,7 +15,7 @@ using Trail_Tracker.Helpers;
 
 namespace Trail_Tracker
 {
-    [Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/trailtrackericon")]
     //[Activity(Label = "TrailTracker")]
     public class MainActivity : Activity, ILocationListener
     {
@@ -56,8 +56,6 @@ namespace Trail_Tracker
 
         private void BtnTestMap_Click(object sender, EventArgs e)
         {
-            //DataAccess da = new DataAccess();
-            // da.Search_Trail("Sample", 0, "", "");
             this.StartActivity(typeof(MapActivity));
         }
 

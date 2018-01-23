@@ -90,42 +90,47 @@ namespace Trail_Tracker
         private void LoadTrails()
         {
             DataAccess da = new DataAccess();
-            DataTable dt = da.Search_Trail("Sample", 0, "", "");
+            DataTable dt;
+            
+            if(da != null)
+            { 
+                dt = da.Search_Trail("Sample", 0, "", "");
 
-            foreach(DataRow row in dt.Rows)
-            {
-                if (_map != null)
+                foreach (DataRow row in dt.Rows)
                 {
-                    //Separate latitude and longitude
-                    string[] startCoord = row.ItemArray[3].ToString().Split(',');
-                    double startLat = -1;
-                    double startLng = -1;
-                    try
+                    if (_map != null)
                     {
-                        startLat = double.Parse(startCoord[0]);
-                        startLng = double.Parse(startCoord[1]);
-                    }
-                    catch(Exception ex)
-                    {
-                        Console.WriteLine("Failed to parse start coordinates for a trail: MapActivity line 105");
-                        Console.WriteLine(ex.ToString());
-                    }
-
-                    if (startLat != -1 && startLng != -1)
-                    {
-                        LatLngBounds bounds = _map.Projection.VisibleRegion.LatLngBounds;
-                        LatLng trailhead = new LatLng(startLat, startLng);
-
-                        //Load trails if they are in bounds of the zoom level
-                        if (bounds.Contains(trailhead))
+                        //Separate latitude and longitude
+                        string[] startCoord = row.ItemArray[3].ToString().Split(',');
+                        double startLat = -1;
+                        double startLng = -1;
+                        try
                         {
-                            MarkerOptions markerOpt1 = new MarkerOptions();
-                            markerOpt1.SetPosition(trailhead);
-                            //Set title to the trail's name
-                            markerOpt1.SetTitle("Name: " + row.ItemArray[1].ToString() + 
-                                " Length: " + row.ItemArray[2].ToString().Substring(0,4) + " miles");
-                            markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
-                            _map.AddMarker(markerOpt1);
+                            startLat = double.Parse(startCoord[0]);
+                            startLng = double.Parse(startCoord[1]);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Failed to parse start coordinates for a trail: MapActivity line 105");
+                            Console.WriteLine(ex.ToString());
+                        }
+
+                        if (startLat != -1 && startLng != -1)
+                        {
+                            LatLngBounds bounds = _map.Projection.VisibleRegion.LatLngBounds;
+                            LatLng trailhead = new LatLng(startLat, startLng);
+
+                            //Load trails if they are in bounds of the zoom level
+                            if (bounds.Contains(trailhead))
+                            {
+                                MarkerOptions markerOpt1 = new MarkerOptions();
+                                markerOpt1.SetPosition(trailhead);
+                                //Set title to the trail's name
+                                markerOpt1.SetTitle("Name: " + row.ItemArray[1].ToString() +
+                                    " Length: " + row.ItemArray[2].ToString().Substring(0, 4) + " miles");
+                                markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
+                                _map.AddMarker(markerOpt1);
+                            }
                         }
                     }
                 }

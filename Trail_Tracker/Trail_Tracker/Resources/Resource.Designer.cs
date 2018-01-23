@@ -464,17 +464,20 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f02001e
 			public const int notification_icon_background = 2130837534;
 			
-			// aapt resource value: 0x7f020021
-			public const int notification_template_icon_bg = 2130837537;
-			
 			// aapt resource value: 0x7f020022
-			public const int notification_template_icon_low_bg = 2130837538;
+			public const int notification_template_icon_bg = 2130837538;
+			
+			// aapt resource value: 0x7f020023
+			public const int notification_template_icon_low_bg = 2130837539;
 			
 			// aapt resource value: 0x7f02001f
 			public const int notification_tile_bg = 2130837535;
 			
 			// aapt resource value: 0x7f020020
 			public const int notify_panel_notification_icon_bg = 2130837536;
+			
+			// aapt resource value: 0x7f020021
+			public const int TrailTrackerIcon = 2130837537;
 			
 			static Drawable()
 			{
