@@ -17,7 +17,7 @@ namespace Trail_Tracker
 {
     [Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/trailtrackericon")]
     //[Activity(Label = "TrailTracker")]
-    public class MainActivity : Activity, ILocationListener
+    public class MainActivity : BaseActivity, ILocationListener
     {
         Button btnStartTracking;
         Button btnStopTracking;
@@ -38,6 +38,8 @@ namespace Trail_Tracker
 
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.Main);
+
+            InitializeToolbar();
 
             //Creates instance of Start Tracking button
             btnStartTracking = FindViewById<Button>(Resource.Id.btnStartTracking);
