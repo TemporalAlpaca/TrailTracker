@@ -20,6 +20,7 @@ using Android;
 using Android.Content.PM;
 using Trail_Tracker.Helpers;
 using System.Data;
+using Android.Graphics;
 
 namespace Trail_Tracker
 {
@@ -96,45 +97,103 @@ namespace Trail_Tracker
             { 
                 dt = da.Search_Trail("Sample", 0, "", "");
 
+                if(dt != null)
+                { 
                 foreach (DataRow row in dt.Rows)
                 {
-                    if (_map != null)
-                    {
-                        //Separate latitude and longitude
-                        string[] startCoord = row.ItemArray[3].ToString().Split(',');
-                        double startLat = -1;
-                        double startLng = -1;
-                        try
+                        if (_map != null)
                         {
-                            startLat = double.Parse(startCoord[0]);
-                            startLng = double.Parse(startCoord[1]);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Failed to parse start coordinates for a trail: MapActivity line 105");
-                            Console.WriteLine(ex.ToString());
-                        }
-
-                        if (startLat != -1 && startLng != -1)
-                        {
-                            LatLngBounds bounds = _map.Projection.VisibleRegion.LatLngBounds;
-                            LatLng trailhead = new LatLng(startLat, startLng);
-
-                            //Load trails if they are in bounds of the zoom level
-                            if (bounds.Contains(trailhead))
+                            //Separate latitude and longitude
+                            string[] startCoord = row.ItemArray[3].ToString().Split(',');
+                            double startLat = -1;
+                            double startLng = -1;
+                            try
                             {
-                                MarkerOptions markerOpt1 = new MarkerOptions();
-                                markerOpt1.SetPosition(trailhead);
-                                //Set title to the trail's name
-                                markerOpt1.SetTitle("Name: " + row.ItemArray[1].ToString() +
-                                    " Length: " + row.ItemArray[2].ToString().Substring(0, 4) + " miles");
-                                markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
-                                _map.AddMarker(markerOpt1);
+                                startLat = double.Parse(startCoord[0]);
+                                startLng = double.Parse(startCoord[1]);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Failed to parse start coordinates for a trail: MapActivity line 105");
+                                Console.WriteLine(ex.ToString());
+                            }
+
+                            if (startLat != -1 && startLng != -1)
+                            {
+                                LatLngBounds bounds = _map.Projection.VisibleRegion.LatLngBounds;
+                                LatLng trailhead = new LatLng(startLat, startLng);
+
+                                //Load trails if they are in bounds of the zoom level
+                                if (bounds.Contains(trailhead))
+                                {
+                                    LoadMarkers(bounds, trailhead, row);
+                                }
                             }
                         }
                     }
                 }
             }
+        }
+
+        private void LoadMarkers(LatLngBounds bounds, LatLng trailhead, DataRow row)
+        {
+            MarkerOptions markerOpt1 = new MarkerOptions();
+            markerOpt1.SetPosition(trailhead);
+            //Set title to the trail's name
+            markerOpt1.SetTitle("Name: " + row.ItemArray[1].ToString() +
+                " Length: " + row.ItemArray[2].ToString().Substring(0, 4) + " miles");
+            markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
+            _map.AddMarker(markerOpt1);
+
+            LoadTrailPath(row.ItemArray[3].ToString(), row.ItemArray[4].ToString(), row.ItemArray[5].ToString());
+        }
+
+        private void LoadTrailPath(string start, string end, string path)
+        {
+            string[] pathCoords = path.Split(';');
+            string[] latlng = start.Split(',');
+
+            double latitude = 0;
+            double longitude = 0;
+
+            PolylineOptions lineOptions = new PolylineOptions();
+
+            latitude = double.Parse(latlng[0]);
+            longitude = double.Parse(latlng[1]);
+            lineOptions.Add(new LatLng(latitude, longitude));
+
+            //Random rand = new Random();
+            //Color randomColor = Color.Argb(rand.Next(256), rand.Next(256), rand.Next(256), rand.Next(256));
+            //lineOptions.InvokeColor(randomColor);
+            
+            foreach(string coord in pathCoords)
+            {
+                try
+                {
+                    latlng = coord.Split(',');
+
+                    if (latlng.Length > 0)
+                    {
+                        latitude = double.Parse(latlng[0]);
+                        longitude = double.Parse(latlng[1]);
+
+                        lineOptions.Add(new LatLng(latitude, longitude));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error translating path values: LoadTrailPath");
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+
+            latlng = end.Split(',');
+            latitude = double.Parse(latlng[0]);
+            longitude = double.Parse(latlng[1]);
+            lineOptions.Add(new LatLng(latitude, longitude));
+
+            if (pathCoords.Length > 0)
+                _map.AddPolyline(lineOptions);
         }
 
         private LatLng GetLatLng()
