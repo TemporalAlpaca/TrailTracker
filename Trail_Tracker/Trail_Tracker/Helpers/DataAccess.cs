@@ -48,7 +48,7 @@ namespace Trail_Tracker.Helpers
             return true;
         }
 
-        public DataTable Search_Trail(string name, float length, string start, string username)
+        public DataTable Search_Trail(string name, float length, string startLat, string startLong, string username)
         {
             try
             {
@@ -60,7 +60,8 @@ namespace Trail_Tracker.Helpers
 
                         cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = name;
                         cmd.Parameters.Add("@LENGTH", SqlDbType.Float).Value = length;
-                        cmd.Parameters.Add("@START", SqlDbType.Text).Value = start;
+                        cmd.Parameters.Add("@STARTLAT", SqlDbType.Text).Value = startLat;
+                        cmd.Parameters.Add("@STARTLONG", SqlDbType.Text).Value = startLong;
                         cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = username;
 
                         con.Open();

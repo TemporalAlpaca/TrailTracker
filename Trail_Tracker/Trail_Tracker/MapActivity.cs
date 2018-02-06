@@ -24,8 +24,8 @@ using Android.Graphics;
 
 namespace Trail_Tracker
 {
-    [Activity(Label = "MapActivity", MainLauncher = true, Icon = "@drawable/icon")]
-    //[Activity(Label = "MapActivity")]
+    [Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/TrailTrackerIcon")]
+    //[Activity(Label = "")]
     public class MapActivity : Activity, IOnMapReadyCallback
     {
         MapFragment _mapFragment;
@@ -102,12 +102,18 @@ namespace Trail_Tracker
 
         private void LoadTrails()
         {
+            LocationManager locMgr = GetSystemService(Context.LocationService) as LocationManager;
+            Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
+
+            string startlat = loc.Latitude.ToString().Substring(0, 4);
+            string startLong = loc.Longitude.ToString().Substring(0, 4);
+
             DataAccess da = new DataAccess();
             DataTable dt;
             
             if(da != null)
             { 
-                dt = da.Search_Trail("Sample", 0, "", "");
+                dt = da.Search_Trail("", 0, startlat, startLong, "");
 
                 if(dt != null)
                 { 

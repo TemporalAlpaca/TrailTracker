@@ -534,14 +534,14 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0017
 			public const int btnAddTrail = 2131361815;
 			
-			// aapt resource value: 0x7f0a0042
-			public const int btnCancelTrail = 2131361858;
-			
-			// aapt resource value: 0x7f0a0043
-			public const int btnConfirmTrail = 2131361859;
-			
 			// aapt resource value: 0x7f0a003b
 			public const int btnTracking = 2131361851;
+			
+			// aapt resource value: 0x7f0a0044
+			public const int btnTrailSubmitDialogCancel = 2131361860;
+			
+			// aapt resource value: 0x7f0a0045
+			public const int btnTrailSubmitDialogConfirm = 2131361861;
 			
 			// aapt resource value: 0x7f0a002a
 			public const int cancel_action = 2131361834;
@@ -672,6 +672,9 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0003
 			public const int text2 = 2131361795;
 			
+			// aapt resource value: 0x7f0a0041
+			public const int textTrailSubmitDialogHeader = 2131361857;
+			
 			// aapt resource value: 0x7f0a003a
 			public const int textTrailTrackerHeader = 2131361850;
 			
@@ -693,11 +696,14 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a003e
 			public const int txtTrailName = 2131361854;
 			
+			// aapt resource value: 0x7f0a0043
+			public const int txtTrailSubmitDialogLength = 2131361859;
+			
 			// aapt resource value: 0x7f0a0040
 			public const int txtTrailUsername = 2131361856;
 			
-			// aapt resource value: 0x7f0a0041
-			public const int txtboxTrailName = 2131361857;
+			// aapt resource value: 0x7f0a0042
+			public const int txtboxTrailName = 2131361858;
 			
 			// aapt resource value: 0x7f0a000e
 			public const int wide = 2131361806;

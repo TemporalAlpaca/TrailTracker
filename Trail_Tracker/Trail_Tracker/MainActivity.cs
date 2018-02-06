@@ -52,52 +52,21 @@ namespace Trail_Tracker
 
             Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
 
+            //Final update for onscreen lat and long
             txtLatitude.Text = loc.Latitude.ToString();
             txtLongitude.Text = loc.Longitude.ToString();
 
             endCoord = new Location(loc);
             
+            //stop tracking location
             locMgr.RemoveUpdates(this);
 
-            string displayCoords = "Start Position:\nLatitude: " + startCoord.Latitude.ToString();
-            displayCoords += "\nLongitude: ";
-            displayCoords += startCoord.Longitude.ToString();
-            displayCoords += "\n";
-
-            foreach (Location coord in path)
-            {
-                displayCoords += "\nLatitude: ";
-                displayCoords += coord.Latitude.ToString();
-                displayCoords += "\nLongitude: ";
-                displayCoords += coord.Longitude.ToString();
-                displayCoords += "\n";
-            }
-            displayCoords += "\nEnd Position:";
-            displayCoords += "\nLatitude: ";
-            displayCoords += endCoord.Latitude.ToString();
-            displayCoords += "\nLongitude: ";
-            displayCoords += endCoord.Longitude.ToString();
-
-            length = CalcDistance();
-            displayCoords += "\n\nTotal Distance: " + length.ToString() + " miles";
-
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.SetTitle("GPS Coordinates");
-            alert.SetMessage(displayCoords);
-
-            alert.SetPositiveButton("Confirm", (senderAlert, args) => {
-                InsertTrail("Sample", length, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
-                    endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), path, "Caleb");
-            });
-
-            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
-            });
-
-            Dialog dialog = alert.Create();
-            dialog.Show();
+            //create dialog box to name trail
+            InsertTrail(length, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
+                endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), path);
         }
 
-        private void InsertTrail(string name, float length, string start, string end, List<Location> path, string username)
+        private void InsertTrail(float length, string start, string end, List<Location> path)
         {
             //Handle translating path values
             string coordinates = "";
@@ -112,12 +81,20 @@ namespace Trail_Tracker
                 coordinates += coord.Longitude.ToString();
             }
 
-            DataAccess dataAccess = new DataAccess();
-            dataAccess.Insert_Trail(name, length, start, end, coordinates, username);
+            //Create new dialog for trail submission
+            Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+
+            length = CalcDistance();
+
+            TrailSubmitDialog dialogFragment = new TrailSubmitDialog(length, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
+                endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), coordinates, "Caleb");
+
+            dialogFragment.Show(transaction, "TrailSubmit_Dialog");
         }
 
         private void BtnStartTracking_Click(object sender, System.EventArgs e)
         {
+            //check permissions before tracking
             string permission = Manifest.Permission.AccessFineLocation;
             if (this.CheckSelfPermission(permission) == (int)Permission.Granted)
             {
@@ -126,6 +103,7 @@ namespace Trail_Tracker
                 Location loc;
                 try
                 {
+                    //get start location
                     loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
                     txtLatitude.Text = "Latitude: " + loc.Latitude.ToString();
                     txtLongitude.Text = "Longitude: " + loc.Longitude.ToString();
