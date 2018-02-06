@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100" >
+  <EditText
+      android:id="@+id/txtboxTrailName"
+      android:minWidth="400dp"
+      android:layout_weight="8"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" />
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="10">
+    <Button
+      android:id="@+id/btnCancelTrail"
+      android:text="Cancel"
+      android:layout_width="200dp"
+      android:layout_height="50dp"
+      android:layout_weight="10"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp"/>
+    <Button
+      android:id="@+id/btnConfirmTrail"
+      android:text="Confirm"
+      android:layout_width="200dp"
+      android:layout_height="50dp"
+      android:layout_weight="10"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp"/>
+  </LinearLayout>    
+</LinearLayout>

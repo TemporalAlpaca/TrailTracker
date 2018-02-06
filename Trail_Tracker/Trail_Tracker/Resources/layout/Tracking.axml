@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:weightSum="100">
+    <TextView
+        android:text="Click start to begin tracking!"
+        android:layout_width="match_parent"
+        android:layout_weight="10"
+        android:layout_height="0dp"
+        android:textColor="#368DEB"
+        android:gravity="center"
+        android:id="@+id/textTrailTrackerHeader"
+        android:textStyle="bold"
+        android:textSize="26sp" />
+    <Button
+        android:background="@drawable/blue_button"
+        style="@style/button_text"
+        android:text="Start Tracking"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:id="@+id/btnTracking"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        android:textSize="15sp" />
+    <TextView
+        android:text="Latitude:"
+        android:layout_width="match_parent"
+        android:layout_weight="20"
+        android:layout_height="0dp"
+        android:textColor="#368DEB"
+        android:gravity="center"
+        android:id="@+id/txtLatitude"
+        android:textStyle="bold"
+        android:textSize="26sp" />
+    <TextView
+        android:text="Longitude:"
+        android:layout_width="match_parent"
+        android:layout_weight="20"
+        android:layout_height="0dp"
+        android:textColor="#368DEB"
+        android:gravity="center"
+        android:id="@+id/txtLongitude"
+        android:textStyle="bold"
+        android:textSize="26sp" />
+</LinearLayout>

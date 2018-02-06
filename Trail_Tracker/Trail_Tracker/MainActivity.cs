@@ -15,13 +15,11 @@ using Trail_Tracker.Helpers;
 
 namespace Trail_Tracker
 {
-    [Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/trailtrackericon")]
-    //[Activity(Label = "TrailTracker")]
+    //[Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/trailtrackericon")]
+    [Activity(Label = "TrackingActivity")]
     public class MainActivity : BaseActivity, ILocationListener
     {
-        Button btnStartTracking;
-        Button btnStopTracking;
-        Button btnTestMap;
+        Button btnTracking;
   
         TextView txtLatitude;
         TextView txtLongitude;
@@ -37,28 +35,14 @@ namespace Trail_Tracker
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Main);
-
-            InitializeToolbar();
+            SetContentView (Resource.Layout.Tracking);
 
             //Creates instance of Start Tracking button
-            btnStartTracking = FindViewById<Button>(Resource.Id.btnStartTracking);
-            btnStartTracking.Click += BtnStartTracking_Click;
-
-            //Creates instance of Sign in button
-            btnStopTracking = FindViewById<Button>(Resource.Id.btnStopTracking);
-            btnStopTracking.Click += BtnStopTracking_Click;
-
-            btnTestMap = FindViewById<Button>(Resource.Id.btnTestMap);
-            btnTestMap.Click += BtnTestMap_Click;
+            btnTracking = FindViewById<Button>(Resource.Id.btnTracking);
+            btnTracking.Click += BtnStartTracking_Click;
 
             txtLatitude = FindViewById<TextView>(Resource.Id.txtLatitude);
             txtLongitude = FindViewById<TextView>(Resource.Id.txtLongitude);
-        }
-
-        private void BtnTestMap_Click(object sender, EventArgs e)
-        {
-            this.StartActivity(typeof(MapActivity));
         }
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)
@@ -153,7 +137,6 @@ namespace Trail_Tracker
                     Console.Write(ex.ToString());
                 }
 
-
                 try
                 {
                     //Poll every 2000ms, when distance has changed more than 1 meter
@@ -170,6 +153,12 @@ namespace Trail_Tracker
                 request_permissions[0] = Manifest.Permission.AccessFineLocation;
                 ActivityCompat.RequestPermissions(this, request_permissions, 0);
             }
+
+            //Change button functionality
+            btnTracking.Text = "Stop Tracking";
+            btnTracking.Click -= BtnStartTracking_Click;
+            btnTracking.Click += BtnStopTracking_Click;
+
         }
 
         public void OnLocationChanged(Location location)

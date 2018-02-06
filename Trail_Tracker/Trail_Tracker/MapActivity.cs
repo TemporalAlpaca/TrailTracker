@@ -24,17 +24,25 @@ using Android.Graphics;
 
 namespace Trail_Tracker
 {
-    //[Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/icon")]
-    [Activity(Label = "MapActivity")]
+    [Activity(Label = "MapActivity", MainLauncher = true, Icon = "@drawable/icon")]
+    //[Activity(Label = "MapActivity")]
     public class MapActivity : Activity, IOnMapReadyCallback
     {
         MapFragment _mapFragment;
         GoogleMap _map;
+        Button btnAddTrail;
 
         public void OnMapReady(GoogleMap googleMap)
         {
             _map = googleMap;
             SetCamera();
+            LoadTrails();
+
+            _map.CameraChange += _map_CameraMove;
+        }
+
+        private void _map_CameraMove(object sender, EventArgs e)
+        {
             LoadTrails();
         }
 
@@ -44,6 +52,7 @@ namespace Trail_Tracker
 
             try
             {
+                CheckLocationPermissions();
                 SetContentView(Resource.Layout.Map);
             }
             catch(Exception ex)
@@ -67,6 +76,9 @@ namespace Trail_Tracker
             }
 
             _mapFragment.GetMapAsync(this);
+
+            btnAddTrail = FindViewById<Button>(Resource.Id.btnAddTrail);
+            btnAddTrail.Click += BtnAddTrail_Click;
         }
 
         private void SetCamera()
@@ -220,5 +232,35 @@ namespace Trail_Tracker
             else
                 return null;
         }
+
+
+        private void BtnAddTrail_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                //TrailSubmitDialog dialogFragment = new TrailSubmitDialog();
+                //dialogFragment.Show(transaction, "TrailSubmit_Dialog");
+
+                this.StartActivity(typeof(MainActivity));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private void CheckLocationPermissions()
+        {
+            string permission = Manifest.Permission.AccessFineLocation;
+            if (this.CheckSelfPermission(permission) != (int)Permission.Granted)
+            {            
+                string[] request_permissions = new string[1];
+                request_permissions[0] = Manifest.Permission.AccessFineLocation;
+                ActivityCompat.RequestPermissions(this, request_permissions, 0);
+
+            }
+        }
+
     }
 }
