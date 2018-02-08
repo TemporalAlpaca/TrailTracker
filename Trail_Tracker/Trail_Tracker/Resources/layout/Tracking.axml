@@ -17,7 +17,6 @@
         android:textStyle="bold"
         android:textSize="26sp" />
     <Button
-        android:background="@drawable/blue_button"
         style="@style/button_text"
         android:text="Start Tracking"
         android:layout_width="match_parent"

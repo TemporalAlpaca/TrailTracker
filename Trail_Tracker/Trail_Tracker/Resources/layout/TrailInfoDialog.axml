@@ -7,20 +7,15 @@
     <TextView
       android:text=""
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="10"
-      android:gravity="center_horizontal"
+      android:layout_height="wrap_content"
+      android:layout_weight="8"
+      android:gravity="left"
       android:id="@+id/txtTrailName"
-      android:textSize="15sp" />
-    <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:weightSum="25">
+      android:textSize="26sp" />
       <TextView
         android:text=""
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="10"
         android:gravity="left"
         android:id="@+id/txtTrailLength"
@@ -28,10 +23,17 @@
       <TextView
         android:text=""
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="10"
         android:gravity="left"
         android:id="@+id/txtTrailUsername"
         android:textSize="15sp" />
-    </LinearLayout>
+      <TextView
+        android:text="Rating:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="left"
+        android:id="@+id/txtTrailRating"
+        android:textSize="15sp" />
 </LinearLayout>

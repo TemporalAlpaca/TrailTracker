@@ -31,14 +31,18 @@ namespace Trail_Tracker
         MapFragment _mapFragment;
         GoogleMap _map;
         Button btnAddTrail;
+        LocationManager locMgr;
+        Location loc;
+        LatLng latlng;
 
         public void OnMapReady(GoogleMap googleMap)
         {
             _map = googleMap;
+            _map.MarkerClick += _map_MarkerClick;
             SetCamera();
             LoadTrails();
-
             _map.CameraChange += _map_CameraMove;
+            
         }
 
         private void _map_CameraMove(object sender, EventArgs e)
@@ -54,6 +58,8 @@ namespace Trail_Tracker
             {
                 CheckLocationPermissions();
                 SetContentView(Resource.Layout.Map);
+                locMgr = GetSystemService(Context.LocationService) as LocationManager;
+                loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);         
             }
             catch(Exception ex)
             {
@@ -67,7 +73,6 @@ namespace Trail_Tracker
                     .InvokeMapType(GoogleMap.MapTypeTerrain)
                     .InvokeZoomControlsEnabled(false)
                     .InvokeCompassEnabled(true);
-
 
                 Android.App.FragmentTransaction fragTx = FragmentManager.BeginTransaction();
                 _mapFragment = MapFragment.NewInstance(mapOptions);
@@ -83,11 +88,11 @@ namespace Trail_Tracker
 
         private void SetCamera()
         {
-            LatLng location = GetLatLng();
-            if (location != null)
+            latlng = GetLatLng();
+            if (latlng != null)
             {
                 CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                builder.Target(location);
+                builder.Target(latlng);
                 builder.Zoom(15);
                 builder.Bearing(155);
                 CameraPosition cameraPosition = builder.Build();
@@ -102,49 +107,50 @@ namespace Trail_Tracker
 
         private void LoadTrails()
         {
-            LocationManager locMgr = GetSystemService(Context.LocationService) as LocationManager;
-            Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
+            latlng = _map.CameraPosition.Target;
+            if (latlng.Latitude != 0 && latlng.Longitude != 0)
+            {
+                string startlat = latlng.Latitude.ToString().Substring(0, 4);
+                string startLong = latlng.Longitude.ToString().Substring(0, 4);
 
-            string startlat = loc.Latitude.ToString().Substring(0, 4);
-            string startLong = loc.Longitude.ToString().Substring(0, 4);
+                DataAccess da = new DataAccess();
+                DataTable dt;
 
-            DataAccess da = new DataAccess();
-            DataTable dt;
-            
-            if(da != null)
-            { 
-                dt = da.Search_Trail("", 0, startlat, startLong, "");
-
-                if(dt != null)
-                { 
-                foreach (DataRow row in dt.Rows)
+                if (da != null)
                 {
-                        if (_map != null)
+                    dt = da.Search_Trail("", 0, startlat, startLong, "");
+
+                    if (dt != null)
+                    {
+                        foreach (DataRow row in dt.Rows)
                         {
-                            //Separate latitude and longitude
-                            string[] startCoord = row.ItemArray[3].ToString().Split(',');
-                            double startLat = -1;
-                            double startLng = -1;
-                            try
+                            if (_map != null)
                             {
-                                startLat = double.Parse(startCoord[0]);
-                                startLng = double.Parse(startCoord[1]);
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine("Failed to parse start coordinates for a trail: MapActivity line 105");
-                                Console.WriteLine(ex.ToString());
-                            }
-
-                            if (startLat != -1 && startLng != -1)
-                            {
-                                LatLngBounds bounds = _map.Projection.VisibleRegion.LatLngBounds;
-                                LatLng trailhead = new LatLng(startLat, startLng);
-
-                                //Load trails if they are in bounds of the zoom level
-                                if (bounds.Contains(trailhead))
+                                //Separate latitude and longitude
+                                string[] startCoord = row.ItemArray[3].ToString().Split(',');
+                                double startLat = -1;
+                                double startLng = -1;
+                                try
                                 {
-                                    LoadMarkers(bounds, trailhead, row);
+                                    startLat = double.Parse(startCoord[0]);
+                                    startLng = double.Parse(startCoord[1]);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("Failed to parse start coordinates for a trail: MapActivity line 105");
+                                    Console.WriteLine(ex.ToString());
+                                }
+
+                                if (startLat != -1 && startLng != -1)
+                                {
+                                    LatLngBounds bounds = _map.Projection.VisibleRegion.LatLngBounds;
+                                    LatLng trailhead = new LatLng(startLat, startLng);
+
+                                    //Load trails if they are in bounds of the zoom level
+                                    if (bounds.Contains(trailhead))
+                                    {
+                                        LoadMarkers(bounds, trailhead, row);
+                                    }
                                 }
                             }
                         }
@@ -156,10 +162,11 @@ namespace Trail_Tracker
         private void LoadMarkers(LatLngBounds bounds, LatLng trailhead, DataRow row)
         {
             MarkerOptions markerOpt1 = new MarkerOptions();
+
             markerOpt1.SetPosition(trailhead);
             //Set title to the trail's name
-            markerOpt1.SetTitle("Name: " + row.ItemArray[1].ToString() +
-                " Length: " + row.ItemArray[2].ToString().Substring(0, 4) + " miles");
+            markerOpt1.SetTitle(row.ItemArray[1].ToString() +
+                "," + row.ItemArray[2].ToString().Substring(0, 4) + "," + row.ItemArray[6].ToString());
             markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
             _map.AddMarker(markerOpt1);
 
@@ -179,10 +186,8 @@ namespace Trail_Tracker
             latitude = double.Parse(latlng[0]);
             longitude = double.Parse(latlng[1]);
             lineOptions.Add(new LatLng(latitude, longitude));
-
-            //Random rand = new Random();
-            //Color randomColor = Color.Argb(rand.Next(256), rand.Next(256), rand.Next(256), rand.Next(256));
-            //lineOptions.InvokeColor(randomColor);
+            
+            //lineOptions.InvokeColor(colorList[currentColor]);
             
             foreach(string coord in pathCoords)
             {
@@ -222,7 +227,6 @@ namespace Trail_Tracker
                 LocationManager locMgr = GetSystemService(Context.LocationService) as LocationManager;
                 string Provider = LocationManager.GpsProvider;
                 Location loc;
-
                 try
                 {
                     loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
@@ -244,10 +248,6 @@ namespace Trail_Tracker
         {
             try
             {
-                //Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                //TrailSubmitDialog dialogFragment = new TrailSubmitDialog();
-                //dialogFragment.Show(transaction, "TrailSubmit_Dialog");
-
                 this.StartActivity(typeof(MainActivity));
             }
             catch (Exception ex)
@@ -264,9 +264,19 @@ namespace Trail_Tracker
                 string[] request_permissions = new string[1];
                 request_permissions[0] = Manifest.Permission.AccessFineLocation;
                 ActivityCompat.RequestPermissions(this, request_permissions, 0);
-
             }
         }
 
+        private void _map_MarkerClick(object sender, GoogleMap.MarkerClickEventArgs e)
+        {
+            string[] dialogInfo = e.Marker.Title.ToString().Split(',');
+
+            if (dialogInfo.Length > 2)
+            {
+                Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                TrailInfoDialog dialogFragment = new TrailInfoDialog(dialogInfo[0], dialogInfo[1], dialogInfo[2]);
+                dialogFragment.Show(transaction, "TrailInfo_Dialog");
+            }
+        }
     }
 }
