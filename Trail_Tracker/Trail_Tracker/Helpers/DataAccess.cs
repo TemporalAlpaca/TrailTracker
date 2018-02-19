@@ -48,7 +48,7 @@ namespace Trail_Tracker.Helpers
             return true;
         }
 
-        public DataTable Search_Trail(string name, float length, string startLat, string startLong, string username)
+        public DataTable Search_Trail(string trailname, string username)
         {
             try
             {
@@ -58,10 +58,7 @@ namespace Trail_Tracker.Helpers
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = name;
-                        cmd.Parameters.Add("@LENGTH", SqlDbType.Float).Value = length;
-                        cmd.Parameters.Add("@STARTLAT", SqlDbType.Text).Value = startLat;
-                        cmd.Parameters.Add("@STARTLONG", SqlDbType.Text).Value = startLong;
+                        cmd.Parameters.Add("@NAME", SqlDbType.VarChar).Value = trailname;
                         cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = username;
 
                         con.Open();
@@ -79,6 +76,91 @@ namespace Trail_Tracker.Helpers
                 Console.WriteLine(ex.ToString());
                 return null;
             }
+        }
+
+        public DataTable Load_Trail(string startLat, string startLong)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("LOAD_TRAIL", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@STARTLAT", SqlDbType.Text).Value = startLat;
+                        cmd.Parameters.Add("@STARTLONG", SqlDbType.Text).Value = startLong;
+
+                        con.Open();
+                        DataSet ds = new DataSet("LoadResults");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+                        return ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
+
+        //1 = like
+        //0 = dislike
+        public bool Rate_Trail(int trailID, int rating)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("RATE_TRAIL", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@TRAILID", SqlDbType.Int).Value = trailID;
+                        cmd.Parameters.Add("@RATING", SqlDbType.Int).Value = rating;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public bool Add_User(User user)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("ADD_USER", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = user.m_username;
+                        cmd.Parameters.Add("@PASSWORD", SqlDbType.VarChar).Value = user.m_password;
+                        cmd.Parameters.Add("@EMAIL", SqlDbType.VarChar).Value = user.m_email;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            return true;
         }
     }
 }

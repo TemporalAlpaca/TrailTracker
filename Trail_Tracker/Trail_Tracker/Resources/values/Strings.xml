@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Trail Tracker</string>
+    <string name="rating_spinner">-</string>
+  <string-array name="planets_array">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+  </string-array>
     <string name="url">"http://75.142.141.235:3000"</string>
     <string name="default_web_client_id" translatable="false">whos-home-fcb1b</string>
     <string name="gcm_defaultSenderId" translatable="false">162304156377</string>

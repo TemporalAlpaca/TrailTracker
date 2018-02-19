@@ -10,157 +10,42 @@
               android:id="@+id/map"
               android:layout_width="match_parent"
               android:layout_height="0dp"
-              android:layout_weight="90"
+              android:layout_weight="100"
               class="com.google.android.gms.maps.MapFragment" >
-    <!--<ImageButton
-        android:src="@drawable/AddButton"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:id="@+id/btnStartTracking"
-        android:layout_marginLeft="15px"
-        android:layout_marginRight="15px"
-        android:layout_gravity="right|top"
-        android:background="@null"/>-->
+    <Button
+        android:id="@+id/btnSearchTrail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="Search"
+        android:layout_gravity="center|top"
+        android:padding="10dp"/>
     <Button
         android:id="@+id/btnAddTrail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
+        android:layout_gravity="center|top"
         android:text="Add Trail"
         android:padding="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
         android:paddingRight="10dp"/>
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
+        android:layout_gravity="center|bottom"
+        android:layout_marginLeft="50dp"
         android:text="Settings"
         android:padding="10dp"
-        android:layout_marginTop="20dp"
         android:paddingRight="10dp"/>
     <Button
         android:id="@+id/btnFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left|bottom"
+        android:layout_marginRight="50dp"     
+        android:layout_gravity="center|bottom"
         android:text="Friends"
         android:padding="10dp"
-        android:layout_marginTop="20dp"
         android:paddingRight="10dp"/>
   </fragment>
-  <!--Start Toolbar-->
-  <LinearLayout
-      android:id="@+id/footer_border"
-      android:background="@color/dark_grey"
-      android:layout_width="match_parent"
-      android:layout_height="1px"
-      android:layout_above="@+id/footer" />
-  <LinearLayout
-      android:orientation="horizontal"
-      android:background="#0347b5"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="10"
-      android:layout_alignParentBottom="true"
-      android:id="@+id/footer">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="8dp"
-        android:id="@+id/tab1">
-      <ImageButton
-          android:id="@+id/tab1_icon"
-          android:layout_weight="2"
-          android:layout_height="match_parent"
-          android:layout_width="match_parent"
-          android:background="#0347b5"
-          android:clickable="true"
-          android:src="@drawable/Pin"
-          android:fontFamily="sans-serif-light" />
-      <TextView
-          android:gravity="center"
-          android:id="@+id/tab1_text"
-          android:layout_weight="1"
-          android:textColor="@color/white"
-          android:textSize="8dp"
-          android:layout_height="0dp"
-          android:layout_width="match_parent"
-          android:text="Map" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:id="@+id/tab2">
-      <ImageButton
-          android:id="@+id/tab2_icon"
-          android:layout_weight="2"
-          android:layout_height="match_parent"
-          android:layout_width="match_parent"
-          android:background="#0347b5"
-          android:clickable="true"
-          android:fontFamily="sans-serif-light" />
-      <TextView
-          android:gravity="center"
-          android:layout_weight="1"
-          android:id="@+id/tab2_text"
-          android:textColor="@color/white"
-          android:textSize="8dp"
-          android:layout_height="0dp"
-          android:layout_width="match_parent"
-          android:text="" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:id="@+id/tab3">
-      <ImageButton
-          android:id="@+id/tab3_icon"
-          android:layout_weight="2"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:background="#0347b5"
-          android:clickable="true"
-          android:fontFamily="sans-serif-light" />
-      <TextView
-          android:gravity="center"
-          android:id="@+id/tab3_text"
-          android:layout_weight="1"
-          android:textColor="@color/white"
-          android:textSize="8dp"
-          android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:text="" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:id="@+id/tab4">
-      <ImageButton
-          android:id="@+id/tab4_icon"
-          android:layout_weight="2"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:background="#0347b5"
-          android:clickable="true"
-          android:fontFamily="sans-serif-light" />
-      <TextView
-          android:gravity="center"
-          android:id="@+id/tab4_text"
-          android:layout_weight="1"
-          android:textColor="@color/white"
-          android:textSize="8dp"
-          android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:text="" />
-    </LinearLayout>
-  </LinearLayout>
 </LinearLayout>

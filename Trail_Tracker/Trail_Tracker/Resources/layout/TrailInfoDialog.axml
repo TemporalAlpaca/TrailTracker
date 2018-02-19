@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="100">
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
       android:text=""
       android:layout_width="match_parent"
@@ -12,7 +16,15 @@
       android:gravity="left"
       android:id="@+id/txtTrailName"
       android:textSize="26sp" />
-      <TextView
+    <Button
+        android:id="@+id/btnTrailInfoFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="Favorite"
+        android:padding="10dp"/>
+  </LinearLayout>
+    <TextView
         android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,12 +40,39 @@
         android:gravity="left"
         android:id="@+id/txtTrailUsername"
         android:textSize="15sp" />
-      <TextView
-        android:text="Rating:"
-        android:layout_width="match_parent"
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btnTrailInfoLike"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:gravity="left"
-        android:id="@+id/txtTrailRating"
-        android:textSize="15sp" />
+        android:layout_marginLeft="10dp"
+        android:text="Like"
+        android:padding="10dp"/>
+    <TextView
+      android:text=" 0"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="10"
+      android:gravity="left"
+      android:id="@+id/txtTrailLikes"
+      android:textSize="15sp" />        
+   <Button
+      android:id="@+id/btnTrailInfoDislike"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:text="Dislike"
+      android:padding="10dp"/>
+    <TextView
+      android:text=" 0"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="10"
+      android:gravity="left"
+      android:id="@+id/txtTrailDislikes"
+      android:textSize="15sp" />
+  </LinearLayout>
 </LinearLayout>

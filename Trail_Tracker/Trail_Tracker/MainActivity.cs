@@ -23,12 +23,15 @@ namespace Trail_Tracker
   
         TextView txtLatitude;
         TextView txtLongitude;
+        TextView txtDistance;
         LocationManager locMgr;
 
         Location startCoord;
         Location endCoord;
+        Location prevCoord;
 
         List<Location> path = new List<Location>();
+        float distance = 0;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -43,12 +46,12 @@ namespace Trail_Tracker
 
             txtLatitude = FindViewById<TextView>(Resource.Id.txtLatitude);
             txtLongitude = FindViewById<TextView>(Resource.Id.txtLongitude);
+            txtDistance = FindViewById<TextView>(Resource.Id.txtDistance);
         }
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)
         {
             locMgr = GetSystemService(Context.LocationService) as LocationManager;
-            float length = 0;
 
             Location loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
 
@@ -62,11 +65,11 @@ namespace Trail_Tracker
             locMgr.RemoveUpdates(this);
 
             //create dialog box to name trail
-            InsertTrail(length, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
+            InsertTrail(startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
                 endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), path);
         }
 
-        private void InsertTrail(float length, string start, string end, List<Location> path)
+        private void InsertTrail(string start, string end, List<Location> path)
         {
             //Handle translating path values
             string coordinates = "";
@@ -84,9 +87,9 @@ namespace Trail_Tracker
             //Create new dialog for trail submission
             Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
 
-            length = CalcDistance();
+            //length = CalcDistance();
 
-            TrailSubmitDialog dialogFragment = new TrailSubmitDialog(length, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
+            TrailSubmitDialog dialogFragment = new TrailSubmitDialog(distance, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
                 endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), coordinates, "Caleb");
 
             dialogFragment.Show(transaction, "TrailSubmit_Dialog");
@@ -94,6 +97,8 @@ namespace Trail_Tracker
 
         private void BtnStartTracking_Click(object sender, System.EventArgs e)
         {
+            distance = 0;
+            prevCoord = null;
             //check permissions before tracking
             string permission = Manifest.Permission.AccessFineLocation;
             if (this.CheckSelfPermission(permission) == (int)Permission.Granted)
@@ -145,6 +150,19 @@ namespace Trail_Tracker
             txtLongitude.Text = "Longitude: " + location.Longitude;
 
             path.Add(new Location(location));
+
+            if(prevCoord != null)
+            {
+                distance += prevCoord.DistanceTo(location);
+
+                //convert from meters to miles
+                distance = distance / (float)1609.344;
+                if (distance > 0.01)
+                    txtDistance.Text = distance.ToString().Substring(0, 4) + " miles";
+                else
+                    txtDistance.Text = "0 miles";
+            }
+            prevCoord = location;
         }
 
         public void OnProviderDisabled(string provider)

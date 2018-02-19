@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <!--Username field-->
+  <TextView
+      android:text="Enter username"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:textColor="#368DEB"
+      android:layout_weight="10"
+      android:id="@+id/textviewusername" />
+  <EditText
+      android:id="@+id/signinusername"
+      android:minWidth="400dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" />
+  <!--Password field-->
+  <TextView
+      android:text="Enter password"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:textColor="#368DEB"
+      android:layout_weight="10"
+      android:id="@+id/textviewpassword" />
+  <EditText
+      android:id="@+id/signinpassword"
+      android:layout_width="fill_parent"
+      android:inputType="textPassword"
+      android:layout_height="wrap_content" />
+  <!--Confirm-->
+  <Button
+      android:background="@drawable/blue_button"
+      android:text="Sign In"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="15"
+      android:id="@+id/buttonlogin"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp" />
+</LinearLayout>

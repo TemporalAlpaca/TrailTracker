@@ -24,25 +24,51 @@ using Android.Graphics;
 
 namespace Trail_Tracker
 {
-    [Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/TrailTrackerIcon")]
-    //[Activity(Label = "")]
-    public class MapActivity : Activity, IOnMapReadyCallback
+    //[Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/TrailTrackerIcon")]
+    [Activity(Label = "TrailTracker")]
+    public class MapActivity : Activity, IOnMapReadyCallback, IDialogInterfaceOnDismissListener
     {
         MapFragment _mapFragment;
         GoogleMap _map;
-        Button btnAddTrail;
+        Button btnAddTrail, btnSettings, btnSearch;
         LocationManager locMgr;
         Location loc;
         LatLng latlng;
+        List<Tuple<MarkerOptions, Trail>> TrailList;
+        private string m_username, m_email;
+
+        //public MapActivity(User user)
+        //{
+        //    m_user = user;
+        //}
 
         public void OnMapReady(GoogleMap googleMap)
         {
             _map = googleMap;
-            _map.MarkerClick += _map_MarkerClick;
+            _map.InfoWindowClick += _map_InfoWindowClick;
             SetCamera();
+            TrailList.Clear();
             LoadTrails();
             _map.CameraChange += _map_CameraMove;
-            
+        }
+
+        private void _map_InfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
+        {
+            string[] dialogInfo = e.Marker.Title.ToString().Split(',');
+            Trail trail = null;
+
+            if (dialogInfo.Length > 2)
+            {
+                for(int i = 0; i < TrailList.Count; ++i)
+                {
+                    if (e.Marker.Title == TrailList[i].Item1.Title)
+                        trail = TrailList[i].Item2;
+                }
+
+                Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                TrailInfoDialog dialogFragment = new TrailInfoDialog(trail);
+                dialogFragment.Show(transaction, "TrailInfo_Dialog");
+            }
         }
 
         private void _map_CameraMove(object sender, EventArgs e)
@@ -56,16 +82,21 @@ namespace Trail_Tracker
 
             try
             {
+                var userInfo = this.Intent.GetStringExtra("User").Split(',');
+                m_username = userInfo[0];
+                m_email = userInfo[1];
+
+                TrailList = new List<Tuple<MarkerOptions, Trail>>();
                 CheckLocationPermissions();
                 SetContentView(Resource.Layout.Map);
                 locMgr = GetSystemService(Context.LocationService) as LocationManager;
-                loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);         
+                loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);    
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.Write(ex.ToString());
             }
-
+            
             _mapFragment = FragmentManager.FindFragmentByTag("map") as MapFragment;
             if (_mapFragment == null)
             {
@@ -84,6 +115,9 @@ namespace Trail_Tracker
 
             btnAddTrail = FindViewById<Button>(Resource.Id.btnAddTrail);
             btnAddTrail.Click += BtnAddTrail_Click;
+
+            btnSearch = FindViewById<Button>(Resource.Id.btnSearchTrail);
+            btnSearch.Click += BtnSearch_Click;
         }
 
         private void SetCamera()
@@ -94,7 +128,7 @@ namespace Trail_Tracker
                 CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
                 builder.Target(latlng);
                 builder.Zoom(15);
-                builder.Bearing(155);
+                builder.Bearing(0);
                 CameraPosition cameraPosition = builder.Build();
                 CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
 
@@ -111,14 +145,14 @@ namespace Trail_Tracker
             if (latlng.Latitude != 0 && latlng.Longitude != 0)
             {
                 string startlat = latlng.Latitude.ToString().Substring(0, 4);
-                string startLong = latlng.Longitude.ToString().Substring(0, 4);
+                string startlong = latlng.Longitude.ToString().Substring(0, 4);
 
                 DataAccess da = new DataAccess();
                 DataTable dt;
 
                 if (da != null)
                 {
-                    dt = da.Search_Trail("", 0, startlat, startLong, "");
+                    dt = da.Load_Trail(startlat, startlong);
 
                     if (dt != null)
                     {
@@ -169,6 +203,16 @@ namespace Trail_Tracker
                 "," + row.ItemArray[2].ToString().Substring(0, 4) + "," + row.ItemArray[6].ToString());
             markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
             _map.AddMarker(markerOpt1);
+
+            //Add trail and trail ID to a list
+            try
+            {
+                TrailList.Add(new Tuple<MarkerOptions, Trail>(markerOpt1, new Trail(row.ItemArray)));
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Error parsing trail ID LoadMarkers");
+            }
 
             LoadTrailPath(row.ItemArray[3].ToString(), row.ItemArray[4].ToString(), row.ItemArray[5].ToString());
         }
@@ -256,6 +300,15 @@ namespace Trail_Tracker
             }
         }
 
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            //Create new dialog for trail search
+            Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            TrailSearchDialog dialogFragment = new TrailSearchDialog();
+
+            dialogFragment.Show(transaction, "TrailSubmit_Dialog");
+        }
+
         private void CheckLocationPermissions()
         {
             string permission = Manifest.Permission.AccessFineLocation;
@@ -267,15 +320,43 @@ namespace Trail_Tracker
             }
         }
 
-        private void _map_MarkerClick(object sender, GoogleMap.MarkerClickEventArgs e)
+        private void _map_MapLongClick(object sender, GoogleMap.MapLongClickEventArgs e)
         {
-            string[] dialogInfo = e.Marker.Title.ToString().Split(',');
+            
+        }
 
-            if (dialogInfo.Length > 2)
+        public void OnDismiss(IDialogInterface dialog)
+        {
+        }
+
+        public void GetCoord(string coord)
+        {
+            //Use this function to set new target.
+            //Called after a user selects a trail from the search list.
+            if (coord != null && coord.Trim() != "")
             {
-                Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                TrailInfoDialog dialogFragment = new TrailInfoDialog(dialogInfo[0], dialogInfo[1], dialogInfo[2]);
-                dialogFragment.Show(transaction, "TrailInfo_Dialog");
+                string[] startcoords = coord.Split(',');
+                try
+                {
+                    latlng.Latitude = float.Parse(startcoords[0]);
+                    latlng.Longitude = float.Parse(startcoords[1]);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error parsing return values from Search Dialog");
+                }
+
+                CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                builder.Target(latlng);
+                builder.Zoom(15);
+                builder.Bearing(0);
+                CameraPosition cameraPosition = builder.Build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+
+                if (_map != null)
+                {
+                    _map.MoveCamera(cameraUpdate);
+                }
             }
         }
     }

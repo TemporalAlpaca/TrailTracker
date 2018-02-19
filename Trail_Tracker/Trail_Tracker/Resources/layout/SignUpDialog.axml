@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <!--Username field-->
+  <TextView
+      android:text="Enter desired username"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="10"
+      android:id="@+id/textusername" />
+  <EditText
+      android:id="@+id/usernametext"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" />
+  <!--Password field-->
+  <TextView
+      android:text="Enter password"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="10"
+      android:id="@+id/textpassword" />
+  <EditText
+      android:id="@+id/passwordtext"
+      android:layout_width="fill_parent"
+      android:inputType="textPassword"
+      android:layout_height="wrap_content" />
+  <TextView
+      android:text="Confirm Password"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="10"
+      android:id="@+id/textconfirmpassword" />
+  <EditText
+      android:id="@+id/repeatpasswordtext"
+      android:layout_width="fill_parent"
+      android:inputType="textPassword"
+      android:layout_height="wrap_content" />
+  <!--Email field-->
+  <TextView
+      android:text="Enter email address"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="10"
+      android:id="@+id/textemail" />
+  <EditText
+      android:id="@+id/emailtext"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" />
+  <!--Confirm-->
+  <Button
+      android:text="Create Account"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="15"
+      android:id="@+id/btnConfirmSignUp"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp" />
+</LinearLayout>
