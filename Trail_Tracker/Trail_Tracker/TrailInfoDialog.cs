@@ -13,17 +13,19 @@ using Android.Widget;
 using Android;
 using Android.Graphics;
 using Trail_Tracker.Helpers;
+using System.Data;
 
 namespace Trail_Tracker
 {
     public class TrailInfoDialog : DialogFragment
     {
-        private string m_trailname, m_length, m_username;
+        private string m_trailname, m_length, m_username, m_current_user;
         private TextView txtTrailName, txtTrailLength, txtTrailUsername, txtTrailLikes, txtTrailDislikes;
         private Button btnFavorite, btnLike, btnDislike;
-        private int m_trailID, m_likes, m_dislikes;
+        private int m_trailID, m_likes, m_dislikes, m_userID;
+        private bool m_rated = false;
 
-        public TrailInfoDialog(Trail trail)
+        public TrailInfoDialog(Trail trail, string current_user, int userID)
         {
             m_trailname = trail.m_trailname;
             m_length = trail.m_length.ToString();
@@ -31,6 +33,8 @@ namespace Trail_Tracker
             m_trailID = trail.m_id;
             m_likes = trail.m_likes;
             m_dislikes = trail.m_dislikes;
+            m_current_user = current_user;
+            m_userID = userID;
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -74,6 +78,14 @@ namespace Trail_Tracker
             btnFavorite.Background.SetColorFilter(Color.Gold, PorterDuff.Mode.Multiply);
             btnFavorite.Click += BtnFavorite_Click;
 
+            DataAccess da = new DataAccess();
+
+            if(da.Check_Rate(m_trailID, m_userID).Rows.Count != 0)
+            {
+                btnLike.Enabled = false;
+                btnDislike.Enabled = false;
+            }
+
             AlertDialog.Builder builder = new AlertDialog.Builder(Activity);
 
             builder.SetView(view);
@@ -87,8 +99,8 @@ namespace Trail_Tracker
         private void BtnLike_Click(object sender, EventArgs e)
         {
             DataAccess da = new DataAccess();
-            da.Rate_Trail(m_trailID, 1);
-            btnDislike.Enabled = true;
+            da.Rate_Trail(m_trailID, 1, m_userID);
+            btnDislike.Enabled = false;
             btnLike.Enabled = false;
 
             int likes = int.Parse(txtTrailLikes.Text);
@@ -98,12 +110,20 @@ namespace Trail_Tracker
         private void BtnDislike_Click(object sender, EventArgs e)
         {
             DataAccess da = new DataAccess();
-            da.Rate_Trail(m_trailID, 0);
-            btnLike.Enabled = true;
+            da.Rate_Trail(m_trailID, 0, m_userID);
+            btnLike.Enabled = false;
             btnDislike.Enabled = false;
 
             int dislikes = int.Parse(txtTrailDislikes.Text);
             txtTrailDislikes.Text = (++dislikes).ToString();
+        }
+
+        public override void OnDismiss(IDialogInterface dialog)
+        {
+            base.OnDismiss(dialog);
+            Activity activity = this.Activity;
+            ((MapActivity)activity).LoadTrails();
+            ((IDialogInterfaceOnDismissListener)activity).OnDismiss(dialog);
         }
     }
 }

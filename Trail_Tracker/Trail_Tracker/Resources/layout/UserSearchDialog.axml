@@ -6,7 +6,7 @@
     android:minHeight="500dp"
     android:weightSum="100" >
   <TextView
-        android:text="Trail Name:"
+        android:text="Enter Username:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -14,7 +14,7 @@
         android:textSize="15sp"
         android:layout_weight="8" />
   <EditText
-      android:id="@+id/txtboxTrailSearch"
+      android:id="@+id/txtboxUserSearch"
       android:minWidth="400dp"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
     android:layout_height="match_parent"
     android:layout_weight="10">
     <Button
-      android:id="@+id/btnTrailSearchDialogCancel"
+      android:id="@+id/btnUserSearchDialogCancel"
       android:text="Cancel"
       android:layout_width="200dp"
       android:layout_height="50dp"
@@ -34,7 +34,7 @@
       android:layout_marginRight="15px"
       android:textSize="15sp"/>
     <Button
-      android:id="@+id/btnTrailSearchDialogConfirm"
+      android:id="@+id/btnUserSearchDialogConfirm"
       android:text="Search"
       android:layout_width="200dp"
       android:layout_height="50dp"
@@ -44,7 +44,7 @@
       android:textSize="15sp"/>
   </LinearLayout>
   <ListView
-   android:id="@+id/lvTrailSearchDialog"
+   android:id="@+id/lvUserSearchDialog"
    android:layout_width="fill_parent"
    android:layout_weight="74"
    android:layout_height="0dp" />

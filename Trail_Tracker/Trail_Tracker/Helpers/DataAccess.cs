@@ -110,7 +110,7 @@ namespace Trail_Tracker.Helpers
 
         //1 = like
         //0 = dislike
-        public bool Rate_Trail(int trailID, int rating)
+        public bool Rate_Trail(int trailID, int rating, int userID)
         {
             try
             {
@@ -122,6 +122,7 @@ namespace Trail_Tracker.Helpers
 
                         cmd.Parameters.Add("@TRAILID", SqlDbType.Int).Value = trailID;
                         cmd.Parameters.Add("@RATING", SqlDbType.Int).Value = rating;
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = userID;
 
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -161,6 +162,181 @@ namespace Trail_Tracker.Helpers
                 return false;
             }
             return true;
+        }
+
+        public DataTable Login(string username, string password)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("LOGIN", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = username;
+                        cmd.Parameters.Add("@PASSWORD", SqlDbType.VarChar).Value = password;
+
+                        con.Open();
+                        DataSet ds = new DataSet("UserData");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+                        return ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
+
+        public DataTable Find_User(string username)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("FIND_USER", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = username;
+
+                        con.Open();
+                        DataSet ds = new DataSet("UserData");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+                        return ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
+
+        //1 = like
+        //0 = dislike
+        public DataTable Check_Rate(int trailID, int userID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("CHECK_RATE", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = userID;
+                        cmd.Parameters.Add("@TRAILID", SqlDbType.Int).Value = trailID;
+
+                        con.Open();
+                        DataSet ds = new DataSet("LikeData");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+                        return ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
+
+        public DataTable Get_Liked_Trails(int userID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("GET_LIKED_TRAILS", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = userID;
+
+                        con.Open();
+                        DataSet ds = new DataSet("LikedTrails");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+                        return ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
+
+        public DataTable Get_Friends(int userID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("GET_FRIENDS", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = userID;
+
+                        con.Open();
+                        DataSet ds = new DataSet("Friends");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+                        return ds.Tables[0];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
+
+        public bool Add_Friend(int userID, int friendID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("ADD_FRIEND", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = userID;
+                        cmd.Parameters.Add("@FRIENDID", SqlDbType.Int).Value = friendID;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
     }
 }

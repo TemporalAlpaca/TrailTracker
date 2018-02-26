@@ -30,12 +30,12 @@
         android:layout_marginRight="50dp"
         android:paddingRight="10dp"/>
     <Button
-        android:id="@+id/btnSettings"
+        android:id="@+id/btnLikedTrails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:layout_marginLeft="50dp"
-        android:text="Settings"
+        android:text="Liked"
         android:padding="10dp"
         android:paddingRight="10dp"/>
     <Button

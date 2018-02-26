@@ -9,6 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android;
+using Android.Content.PM;
+using Android.Support.V4.App;
 
 namespace Trail_Tracker
 {
@@ -28,6 +31,8 @@ namespace Trail_Tracker
 
             btnLogin.Click += BtnLogin_Click;
             btnSignUp.Click += BtnSignUp_Click;
+
+            CheckLocationPermissions();
         }
 
         private void BtnSignUp_Click(object sender, EventArgs e)
@@ -39,6 +44,20 @@ namespace Trail_Tracker
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
+            Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            LoginDialog dialogFragment = new LoginDialog();
+            dialogFragment.Show(transaction, "Login_Dialog");
+        }
+
+        private void CheckLocationPermissions()
+        {
+            string permission = Manifest.Permission.AccessFineLocation;
+            if (this.CheckSelfPermission(permission) != (int)Permission.Granted)
+            {
+                string[] request_permissions = new string[1];
+                request_permissions[0] = Manifest.Permission.AccessFineLocation;
+                ActivityCompat.RequestPermissions(this, request_permissions, 0);
+            }
         }
     }
 }

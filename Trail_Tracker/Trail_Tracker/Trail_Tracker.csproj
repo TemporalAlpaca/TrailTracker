@@ -112,12 +112,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FriendsDialog.cs" />
     <Compile Include="Helpers\BaseActivity.cs" />
     <Compile Include="Helpers\DataAccess.cs" />
     <Compile Include="Helpers\SearchListAdapter.cs" />
     <Compile Include="Helpers\Trail.cs" />
     <Compile Include="Helpers\User.cs" />
+    <Compile Include="Helpers\UserListAdapter.cs" />
+    <Compile Include="LikedTrailsDialog.cs" />
     <Compile Include="LoginActivity.cs" />
+    <Compile Include="LoginDialog.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MapActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -126,6 +130,7 @@
     <Compile Include="TrailInfoDialog.cs" />
     <Compile Include="TrailSearchDialog.cs" />
     <Compile Include="TrailSubmitDialog.cs" />
+    <Compile Include="UserSearchDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -155,6 +160,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\SignUpDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LikedTrailsDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FriendsDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UserSearchDialog.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -64,7 +64,7 @@ namespace Trail_Tracker
                 if (m_length != 0)
                 {
                     DataAccess da = new DataAccess();
-                    da.Insert_Trail(txtboxTrailName.Text, m_length, m_start, m_end, m_path, "Caleb");
+                    da.Insert_Trail(txtboxTrailName.Text, m_length, m_start, m_end, m_path, m_username);
                 }
                 else
                 {

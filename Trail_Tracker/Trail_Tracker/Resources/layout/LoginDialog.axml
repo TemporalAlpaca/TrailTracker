@@ -10,7 +10,6 @@
       android:gravity="center"
       android:layout_width="match_parent"
       android:layout_height="0dp"
-      android:textColor="#368DEB"
       android:layout_weight="10"
       android:id="@+id/textviewusername" />
   <EditText
@@ -25,7 +24,6 @@
       android:gravity="center"
       android:layout_width="match_parent"
       android:layout_height="0dp"
-      android:textColor="#368DEB"
       android:layout_weight="10"
       android:id="@+id/textviewpassword" />
   <EditText
@@ -35,7 +33,6 @@
       android:layout_height="wrap_content" />
   <!--Confirm-->
   <Button
-      android:background="@drawable/blue_button"
       android:text="Sign In"
       android:layout_width="match_parent"
       android:layout_height="0dp"

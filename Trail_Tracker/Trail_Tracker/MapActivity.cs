@@ -30,12 +30,13 @@ namespace Trail_Tracker
     {
         MapFragment _mapFragment;
         GoogleMap _map;
-        Button btnAddTrail, btnSettings, btnSearch;
+        Button btnAddTrail, btnLiked, btnSearch, btnFriends;
         LocationManager locMgr;
         Location loc;
         LatLng latlng;
         List<Tuple<MarkerOptions, Trail>> TrailList;
         private string m_username, m_email;
+        private int m_userID;
 
         //public MapActivity(User user)
         //{
@@ -66,7 +67,7 @@ namespace Trail_Tracker
                 }
 
                 Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                TrailInfoDialog dialogFragment = new TrailInfoDialog(trail);
+                TrailInfoDialog dialogFragment = new TrailInfoDialog(trail, m_username, m_userID);
                 dialogFragment.Show(transaction, "TrailInfo_Dialog");
             }
         }
@@ -90,7 +91,17 @@ namespace Trail_Tracker
                 CheckLocationPermissions();
                 SetContentView(Resource.Layout.Map);
                 locMgr = GetSystemService(Context.LocationService) as LocationManager;
-                loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);    
+                loc = locMgr.GetLastKnownLocation(LocationManager.GpsProvider);
+
+                DataAccess da = new DataAccess();
+                DataTable dt = new DataTable();
+
+                dt = da.Find_User(m_username);
+
+                if (dt.Rows.Count == 1)
+                {
+                    m_userID = int.Parse(dt.Rows[0].ItemArray[0].ToString());
+                }
             }
             catch (Exception ex)
             {
@@ -118,6 +129,12 @@ namespace Trail_Tracker
 
             btnSearch = FindViewById<Button>(Resource.Id.btnSearchTrail);
             btnSearch.Click += BtnSearch_Click;
+
+            btnLiked = FindViewById<Button>(Resource.Id.btnLikedTrails);
+            btnLiked.Click += BtnLiked_Click;
+
+            btnFriends = FindViewById<Button>(Resource.Id.btnFriends);
+            btnFriends.Click += BtnFriends_Click;
         }
 
         private void SetCamera()
@@ -139,7 +156,7 @@ namespace Trail_Tracker
             }
         }
 
-        private void LoadTrails()
+        public void LoadTrails()
         {
             latlng = _map.CameraPosition.Target;
             if (latlng.Latitude != 0 && latlng.Longitude != 0)
@@ -288,11 +305,21 @@ namespace Trail_Tracker
         }
 
 
+        private void BtnFriends_Click(object sender, EventArgs e)
+        {
+            Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            FriendsDialog dialogFragment = new FriendsDialog(m_userID);
+
+            dialogFragment.Show(transaction, "Friends_Dialog");
+        }
+
         private void BtnAddTrail_Click(object sender, EventArgs e)
         {
             try
             {
-                this.StartActivity(typeof(MainActivity));
+                Intent trackingIntent = new Intent(this, typeof(MainActivity));
+                trackingIntent.PutExtra("User", m_username);
+                StartActivity(trackingIntent);
             }
             catch (Exception ex)
             {
@@ -307,6 +334,15 @@ namespace Trail_Tracker
             TrailSearchDialog dialogFragment = new TrailSearchDialog();
 
             dialogFragment.Show(transaction, "TrailSubmit_Dialog");
+        }
+
+        private void BtnLiked_Click(object sender, EventArgs e)
+        {
+            //Create new dialog for trail search
+            Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            LikedTrailsDialog dialogFragment = new LikedTrailsDialog(m_userID);
+
+            dialogFragment.Show(transaction, "LikedTrails_Dialog");
         }
 
         private void CheckLocationPermissions()

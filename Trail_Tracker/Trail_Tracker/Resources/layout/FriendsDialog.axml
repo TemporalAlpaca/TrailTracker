@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="500dp"
+    android:weightSum="100">
+  <TextView
+      android:text="Your Friends:"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:id="@+id/txtFriendsDialogHeader"
+      android:textSize="15sp"
+      android:layout_weight="8" />
+  <ListView
+      android:id="@+id/lvFriends"
+      android:layout_width="fill_parent"
+      android:layout_weight="84"
+      android:layout_height="0dp" />
+  <Button
+      android:text="Add Friends"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="8"
+      android:id="@+id/btnAddFriends"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp" />
+</LinearLayout>

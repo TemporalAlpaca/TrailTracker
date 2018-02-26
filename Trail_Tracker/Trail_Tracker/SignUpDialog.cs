@@ -83,27 +83,6 @@ namespace Trail_Tracker
             }
         }
 
-        //private void InvalidResponse(IRestResponse response)
-        //{
-        //    AlertDialog.Builder alert = new AlertDialog.Builder(this.Context);
-        //    alert.SetTitle("Signup Failed");
-
-        //    if (response.Content != "")
-        //        alert.SetMessage(response.Content);
-        //    else
-        //        alert.SetMessage("Connection Error");
-
-        //    alert.SetPositiveButton("Retry", (senderAlert, args) => { });
-
-        //    alert.SetNegativeButton("Cancel", (senderAlert, args) =>
-        //    {
-        //        Dismiss();
-        //    });
-        //    Dialog dialog = alert.Create();
-        //    dialog.Show();
-
-        //}
-
         private void InvalidInput()
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this.Context);

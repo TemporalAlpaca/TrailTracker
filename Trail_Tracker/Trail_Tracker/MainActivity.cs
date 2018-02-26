@@ -32,6 +32,7 @@ namespace Trail_Tracker
 
         List<Location> path = new List<Location>();
         float distance = 0;
+        string m_username;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -47,6 +48,8 @@ namespace Trail_Tracker
             txtLatitude = FindViewById<TextView>(Resource.Id.txtLatitude);
             txtLongitude = FindViewById<TextView>(Resource.Id.txtLongitude);
             txtDistance = FindViewById<TextView>(Resource.Id.txtDistance);
+
+            m_username = this.Intent.GetStringExtra("User");
         }
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)
@@ -90,7 +93,7 @@ namespace Trail_Tracker
             //length = CalcDistance();
 
             TrailSubmitDialog dialogFragment = new TrailSubmitDialog(distance, startCoord.Latitude.ToString() + "," + startCoord.Longitude.ToString(),
-                endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), coordinates, "Caleb");
+                endCoord.Latitude.ToString() + "," + endCoord.Longitude.ToString(), coordinates, m_username);
 
             dialogFragment.Show(transaction, "TrailSubmit_Dialog");
         }
