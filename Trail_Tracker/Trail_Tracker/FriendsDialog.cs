@@ -86,11 +86,37 @@ namespace Trail_Tracker
             {
                 lvFriends.Adapter = new UserListAdapter(this.Activity, Users);
                 lvFriends.ItemClick += LvLikedTrails_ItemClick;
+                lvFriends.ItemLongClick += LvFriends_ItemLongClick;
             }
             else
             {
                 txtFriends.Text = "You don't have any friends :(";
             }
+        }
+
+        private void LvFriends_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this.Context);
+            alert.SetTitle("Unfollow user " + Users[e.Position].m_username + " ?");
+
+            alert.SetPositiveButton("Confirm", (senderAlert, args) => {
+                DataAccess da = new DataAccess();
+                if (da.Remove_Friend(m_userID, int.Parse(Users[e.Position].m_id)))
+                {
+                    Toast.MakeText(this.Context, "Unfollow successful!", ToastLength.Long).Show();
+
+                    Users.Remove(Users[e.Position]);
+                    lvFriends.Adapter = new UserListAdapter(this.Activity, Users);
+                }
+                else
+                    Toast.MakeText(this.Context, "Unfollow failed!", ToastLength.Long).Show();
+            });
+
+            alert.SetNegativeButton("Cancel", (senderAlert, args) =>
+            {});
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
         }
 
         private void LvLikedTrails_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

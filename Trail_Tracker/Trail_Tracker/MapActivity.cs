@@ -26,7 +26,7 @@ namespace Trail_Tracker
 {
     //[Activity(Label = "TrailTracker", MainLauncher = true, Icon = "@drawable/TrailTrackerIcon")]
     [Activity(Label = "TrailTracker")]
-    public class MapActivity : Activity, IOnMapReadyCallback, IDialogInterfaceOnDismissListener
+    public class MapActivity : Activity, IOnMapReadyCallback, IDialogInterfaceOnDismissListener, GoogleMap.IOnMarkerClickListener
     {
         MapFragment _mapFragment;
         GoogleMap _map;
@@ -35,22 +35,28 @@ namespace Trail_Tracker
         Location loc;
         LatLng latlng;
         List<Tuple<MarkerOptions, Trail>> TrailList;
+        List<Polyline> PathList;
         private string m_username, m_email;
         private int m_userID;
-
-        //public MapActivity(User user)
-        //{
-        //    m_user = user;
-        //}
 
         public void OnMapReady(GoogleMap googleMap)
         {
             _map = googleMap;
             _map.InfoWindowClick += _map_InfoWindowClick;
+            _map.SetOnMarkerClickListener(this);
+            _map.MapClick += _map_MapClick;
             SetCamera();
             TrailList.Clear();
             LoadTrails();
             _map.CameraChange += _map_CameraMove;
+        }
+
+        private void _map_MapClick(object sender, GoogleMap.MapClickEventArgs e)
+        {
+            foreach(Polyline path in PathList)
+            {
+                path.Color = Color.Black;
+            }
         }
 
         private void _map_InfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
@@ -74,13 +80,15 @@ namespace Trail_Tracker
 
         private void _map_CameraMove(object sender, EventArgs e)
         {
+            //TrailList.Clear();
+            //PathList.Clear();
             LoadTrails();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            ActionBar.Hide();
             try
             {
                 var userInfo = this.Intent.GetStringExtra("User").Split(',');
@@ -88,6 +96,7 @@ namespace Trail_Tracker
                 m_email = userInfo[1];
 
                 TrailList = new List<Tuple<MarkerOptions, Trail>>();
+                PathList = new List<Polyline>();
                 CheckLocationPermissions();
                 SetContentView(Resource.Layout.Map);
                 locMgr = GetSystemService(Context.LocationService) as LocationManager;
@@ -212,26 +221,48 @@ namespace Trail_Tracker
 
         private void LoadMarkers(LatLngBounds bounds, LatLng trailhead, DataRow row)
         {
-            MarkerOptions markerOpt1 = new MarkerOptions();
+            bool exists = false;
 
-            markerOpt1.SetPosition(trailhead);
-            //Set title to the trail's name
-            markerOpt1.SetTitle(row.ItemArray[1].ToString() +
-                "," + row.ItemArray[2].ToString().Substring(0, 4) + "," + row.ItemArray[6].ToString());
-            markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
-            _map.AddMarker(markerOpt1);
-
-            //Add trail and trail ID to a list
-            try
+            for(int i = 0; i < TrailList.Count; ++i)
             {
-                TrailList.Add(new Tuple<MarkerOptions, Trail>(markerOpt1, new Trail(row.ItemArray)));
+                if (TrailList[i].Item1.Position.Latitude == trailhead.Latitude &&
+                  TrailList[i].Item1.Position.Longitude == trailhead.Longitude)
+                    exists = true;
             }
-            catch(Exception)
+            if (!exists)
             {
-                Console.WriteLine("Error parsing trail ID LoadMarkers");
-            }
+                MarkerOptions markerOpt1 = new MarkerOptions();
+                float length = (float)(0.00);
 
-            LoadTrailPath(row.ItemArray[3].ToString(), row.ItemArray[4].ToString(), row.ItemArray[5].ToString());
+                try
+                {
+                    length = float.Parse(row.ItemArray[2].ToString());
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Error parsing trail length LoadMarkers()");
+                }
+
+                markerOpt1.SetPosition(trailhead);
+                //Set title to the trail's name
+                markerOpt1.SetTitle(row.ItemArray[1].ToString() +
+                    "," + length.ToString("F2") + "," + row.ItemArray[6].ToString());
+                markerOpt1.SetIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueRed));
+
+                _map.AddMarker(markerOpt1);
+
+                //Add trail and trail ID to a list
+                try
+                {
+                    TrailList.Add(new Tuple<MarkerOptions, Trail>(markerOpt1, new Trail(row.ItemArray)));
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error parsing trail ID LoadMarkers");
+                }
+
+                LoadTrailPath(row.ItemArray[3].ToString(), row.ItemArray[4].ToString(), row.ItemArray[5].ToString());
+            }
         }
 
         private void LoadTrailPath(string start, string end, string path)
@@ -243,6 +274,7 @@ namespace Trail_Tracker
             double longitude = 0;
 
             PolylineOptions lineOptions = new PolylineOptions();
+            lineOptions.Clickable(true);
 
             latitude = double.Parse(latlng[0]);
             longitude = double.Parse(latlng[1]);
@@ -277,7 +309,7 @@ namespace Trail_Tracker
             lineOptions.Add(new LatLng(latitude, longitude));
 
             if (pathCoords.Length > 0)
-                _map.AddPolyline(lineOptions);
+                PathList.Add(_map.AddPolyline(lineOptions));
         }
 
         private LatLng GetLatLng()
@@ -356,13 +388,10 @@ namespace Trail_Tracker
             }
         }
 
-        private void _map_MapLongClick(object sender, GoogleMap.MapLongClickEventArgs e)
-        {
-            
-        }
-
         public void OnDismiss(IDialogInterface dialog)
         {
+            TrailList.Clear();
+            PathList.Clear();
         }
 
         public void GetCoord(string coord)
@@ -394,6 +423,22 @@ namespace Trail_Tracker
                     _map.MoveCamera(cameraUpdate);
                 }
             }
+        }
+
+        public bool OnMarkerClick(Marker marker)
+        {
+            foreach (Polyline path in PathList)
+            {
+                path.Color = Color.Black;
+            }
+
+            for (int i = 0; i < PathList.Count; ++i)
+            {
+                if (marker.Position.Latitude == PathList[i].Points[0].Latitude && 
+                    marker.Position.Longitude == PathList[i].Points[0].Longitude)
+                    PathList[i].Color = Color.Blue;
+            }
+            return false;
         }
     }
 }

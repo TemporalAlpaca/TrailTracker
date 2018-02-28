@@ -338,5 +338,30 @@ namespace Trail_Tracker.Helpers
                 return false;
             }
         }
+        public bool Remove_Friend(int userID, int friendID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("REMOVE_FRIEND", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = userID;
+                        cmd.Parameters.Add("@FRIENDID", SqlDbType.Int).Value = friendID;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
     }
 }

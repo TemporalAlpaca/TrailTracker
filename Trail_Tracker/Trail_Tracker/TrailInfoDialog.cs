@@ -21,14 +21,14 @@ namespace Trail_Tracker
     {
         private string m_trailname, m_length, m_username, m_current_user;
         private TextView txtTrailName, txtTrailLength, txtTrailUsername, txtTrailLikes, txtTrailDislikes;
-        private Button btnFavorite, btnLike, btnDislike;
+        private Button btnReport, btnLike, btnDislike;
         private int m_trailID, m_likes, m_dislikes, m_userID;
         private bool m_rated = false;
 
         public TrailInfoDialog(Trail trail, string current_user, int userID)
         {
             m_trailname = trail.m_trailname;
-            m_length = trail.m_length.ToString();
+            m_length = trail.m_length.ToString("F2");
             m_username = trail.m_username;
             m_trailID = trail.m_id;
             m_likes = trail.m_likes;
@@ -74,9 +74,9 @@ namespace Trail_Tracker
             btnLike.Background.SetColorFilter(Color.Green, PorterDuff.Mode.Multiply);
             btnLike.Click += BtnLike_Click;
 
-            btnFavorite = view.FindViewById<Button>(Resource.Id.btnTrailInfoFavorite);
-            btnFavorite.Background.SetColorFilter(Color.Gold, PorterDuff.Mode.Multiply);
-            btnFavorite.Click += BtnFavorite_Click;
+            btnReport = view.FindViewById<Button>(Resource.Id.btnTrailInfoReport);
+            btnReport.Background.SetColorFilter(Color.DarkRed, PorterDuff.Mode.Multiply);
+            btnReport.Click += BtnReport_Click;
 
             DataAccess da = new DataAccess();
 
@@ -92,7 +92,7 @@ namespace Trail_Tracker
             return builder.Create();
         }
 
-        private void BtnFavorite_Click(object sender, EventArgs e)
+        private void BtnReport_Click(object sender, EventArgs e)
         {
         }
 

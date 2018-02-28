@@ -24,6 +24,8 @@ namespace Trail_Tracker
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            ActionBar.Hide();
+
             SetContentView(Resource.Layout.Login);
 
             btnLogin = FindViewById<Button>(Resource.Id.btnSignIn);

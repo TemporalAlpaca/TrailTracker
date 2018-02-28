@@ -35,7 +35,7 @@ namespace Trail_Tracker.Helpers
                 m_path = databaseArray[5].ToString();
                 m_username = databaseArray[6].ToString();
 
-                m_length = float.Parse(databaseArray[2].ToString().Substring(0,4));
+                m_length = float.Parse(databaseArray[2].ToString());
 
                 m_id = int.Parse(databaseArray[0].ToString());
                 m_likes = int.Parse(databaseArray[7].ToString());

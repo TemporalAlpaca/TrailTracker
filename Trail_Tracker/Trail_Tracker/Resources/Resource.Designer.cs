@@ -577,11 +577,11 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0051
 			public const int btnTrailInfoDislike = 2131361873;
 			
-			// aapt resource value: 0x7f0a004c
-			public const int btnTrailInfoFavorite = 2131361868;
-			
 			// aapt resource value: 0x7f0a004f
 			public const int btnTrailInfoLike = 2131361871;
+			
+			// aapt resource value: 0x7f0a004c
+			public const int btnTrailInfoReport = 2131361868;
 			
 			// aapt resource value: 0x7f0a0055
 			public const int btnTrailSearchDialogCancel = 2131361877;

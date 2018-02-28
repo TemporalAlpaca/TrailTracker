@@ -37,9 +37,10 @@ namespace Trail_Tracker
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            ActionBar.Hide();
 
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.Tracking);
+            SetContentView(Resource.Layout.Tracking);
 
             //Creates instance of Start Tracking button
             btnTracking = FindViewById<Button>(Resource.Id.btnTracking);

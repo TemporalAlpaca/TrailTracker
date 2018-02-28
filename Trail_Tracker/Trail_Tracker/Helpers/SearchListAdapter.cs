@@ -54,7 +54,7 @@ namespace Trail_Tracker.Helpers
             view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = m_results[position].m_trailname;
 
             //set trail username
-            view.FindViewById<TextView>(Android.Resource.Id.Text2).Text = "Length: " + m_results[position].m_length.ToString() +
+            view.FindViewById<TextView>(Android.Resource.Id.Text2).Text = "Length: " + m_results[position].m_length.ToString("F2") +
                 "        Uploaded by: " + m_results[position].m_username;
             // return the view, populated with data, for display
             return view;
