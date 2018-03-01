@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckPasswordDialog.cs" />
     <Compile Include="FriendsDialog.cs" />
     <Compile Include="Helpers\BaseActivity.cs" />
     <Compile Include="Helpers\DataAccess.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="MapActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsDialog.cs" />
     <Compile Include="SignUpDialog.cs" />
     <Compile Include="TrailInfoDialog.cs" />
     <Compile Include="TrailSearchDialog.cs" />
@@ -169,6 +171,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\UserSearchDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CheckPasswordDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SettingsDialog.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

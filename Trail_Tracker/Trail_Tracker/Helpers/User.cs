@@ -24,6 +24,14 @@ namespace Trail_Tracker.Helpers
             m_email = email;
         }
 
+        public User(int id, string username, string password, string email)
+        {
+            m_id = id.ToString();
+            m_username = username;
+            m_password = password;
+            m_email = email;
+        }
+
         public User(object[] databaseArray)
         {
             if(databaseArray.Length == USERCOLUMNS)

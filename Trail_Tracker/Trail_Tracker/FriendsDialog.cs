@@ -21,7 +21,7 @@ namespace Trail_Tracker
         ListView lvFriends;
         TextView txtFriends;
         List<User> Users;
-        Button btnAddFriends;
+        Button btnAddFriends, btnCancelAddFriends;
 
         public FriendsDialog(int userID)
         {
@@ -36,7 +36,7 @@ namespace Trail_Tracker
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            View view = inflater.Inflate(Resource.Layout.LikedTrailsDialog, container, false);
+            View view = inflater.Inflate(Resource.Layout.FriendsDialog, container, false);
 
             return view;
         }
@@ -48,6 +48,9 @@ namespace Trail_Tracker
             btnAddFriends = view.FindViewById<Button>(Resource.Id.btnAddFriends);
             btnAddFriends.Click += BtnAddFriends_Click;
 
+            btnCancelAddFriends = view.FindViewById<Button>(Resource.Id.btnCancelAddFriends);
+            btnCancelAddFriends.Click += BtnCancelAddFriends_Click;
+
             txtFriends = view.FindViewById<TextView>(Resource.Id.txtFriendsDialogHeader);
             lvFriends = view.FindViewById<ListView>(Resource.Id.lvFriends);
             FillFriends();
@@ -56,6 +59,11 @@ namespace Trail_Tracker
 
             builder.SetView(view);
             return builder.Create();
+        }
+
+        private void BtnCancelAddFriends_Click(object sender, EventArgs e)
+        {
+            Dismiss();
         }
 
         private void BtnAddFriends_Click(object sender, EventArgs e)

@@ -17,13 +17,13 @@
       android:gravity="left"
       android:id="@+id/txtTrailName"
       android:textSize="26sp" />
-    <Button
+    <!--<Button
         android:id="@+id/btnTrailInfoReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:text="Report"
-        android:padding="10dp"/>
+        android:padding="10dp"/>-->
   </LinearLayout>
     <TextView
         android:text=""

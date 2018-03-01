@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="500dp"
+    android:weightSum="79" >
+  <TextView
+        android:text="Username:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textUsername"
+        android:textSize="15sp"
+        android:layout_weight="5" />
+  <EditText
+      android:id="@+id/txtboxUpdateUsername"
+      android:minWidth="400dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="8" />
+  <Button
+      android:id="@+id/btnUpdateUsername"
+      android:text="Update Username"
+      android:layout_gravity="center"
+      android:layout_width="200dp"
+      android:layout_height="25dp"
+      android:layout_weight="10"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp"/>
+  <TextView
+        android:text="Email:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textEmail"
+        android:textSize="15sp"
+        android:layout_weight="5" />
+  <EditText
+      android:id="@+id/txtboxUpdateEmail"
+      android:minWidth="400dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="8" />
+  <Button
+      android:id="@+id/btnUpdateEmail"
+      android:text="Update Email"
+      android:layout_gravity="center"
+      android:layout_width="200dp"
+      android:layout_height="25dp"
+      android:layout_weight="10"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp"/>
+  <TextView
+        android:text="Password:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textPassword"
+        android:textSize="15sp"
+        android:layout_weight="5" />
+  <EditText
+      android:id="@+id/txtboxUpdatePassword"
+      android:minWidth="400dp"
+      android:inputType="textPassword"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="8" />
+  <Button
+      android:id="@+id/btnUpdatePassword"
+      android:text="Update Password"
+      android:layout_gravity="center"
+      android:layout_width="200dp"
+      android:layout_height="25dp"
+      android:layout_weight="10"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp"/> 
+  <Button
+      android:id="@+id/btnSettingsDialogCancel"
+      android:text="Back to map"
+      android:layout_gravity="center"
+      android:layout_width="400dp"
+      android:layout_height="25dp"
+      android:layout_weight="10"
+      android:layout_marginTop="25px"
+      android:layout_marginLeft="15px"
+      android:layout_marginRight="15px"
+      android:textSize="15sp"/>
+</LinearLayout>

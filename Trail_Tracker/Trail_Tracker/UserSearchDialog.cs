@@ -93,6 +93,9 @@ namespace Trail_Tracker
                     lvUserSearchDialog.Adapter = new UserListAdapter(this.Activity, Users);
                     lvUserSearchDialog.ItemClick += LvUserSearchDialog_ItemClick;
                 }
+                else
+                    Toast.MakeText(this.Context, "User not found!", ToastLength.Long).Show();
+
             }
 
         }

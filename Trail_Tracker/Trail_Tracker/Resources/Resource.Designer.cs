@@ -514,23 +514,23 @@ namespace Trail_Tracker
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a002c
-			public const int action0 = 2131361836;
-			
-			// aapt resource value: 0x7f0a0029
-			public const int action_container = 2131361833;
+			// aapt resource value: 0x7f0a0033
+			public const int action0 = 2131361843;
 			
 			// aapt resource value: 0x7f0a0030
-			public const int action_divider = 2131361840;
+			public const int action_container = 2131361840;
 			
-			// aapt resource value: 0x7f0a002a
-			public const int action_image = 2131361834;
+			// aapt resource value: 0x7f0a0037
+			public const int action_divider = 2131361847;
 			
-			// aapt resource value: 0x7f0a002b
-			public const int action_text = 2131361835;
+			// aapt resource value: 0x7f0a0031
+			public const int action_image = 2131361841;
 			
-			// aapt resource value: 0x7f0a003a
-			public const int actions = 2131361850;
+			// aapt resource value: 0x7f0a0032
+			public const int action_text = 2131361842;
+			
+			// aapt resource value: 0x7f0a0041
+			public const int actions = 2131361857;
 			
 			// aapt resource value: 0x7f0a000a
 			public const int adjust_height = 2131361802;
@@ -547,77 +547,104 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0013
 			public const int blocking = 2131361811;
 			
-			// aapt resource value: 0x7f0a0018
-			public const int btnAddFriends = 2131361816;
+			// aapt resource value: 0x7f0a001d
+			public const int btnAddFriends = 2131361821;
 			
-			// aapt resource value: 0x7f0a0026
-			public const int btnAddTrail = 2131361830;
-			
-			// aapt resource value: 0x7f0a0045
-			public const int btnConfirmSignUp = 2131361861;
-			
-			// aapt resource value: 0x7f0a0028
-			public const int btnFriends = 2131361832;
-			
-			// aapt resource value: 0x7f0a0027
-			public const int btnLikedTrails = 2131361831;
-			
-			// aapt resource value: 0x7f0a0025
-			public const int btnSearchTrail = 2131361829;
+			// aapt resource value: 0x7f0a002c
+			public const int btnAddTrail = 2131361836;
 			
 			// aapt resource value: 0x7f0a001c
-			public const int btnSignIn = 2131361820;
+			public const int btnCancelAddFriends = 2131361820;
 			
-			// aapt resource value: 0x7f0a001e
-			public const int btnSignUp = 2131361822;
+			// aapt resource value: 0x7f0a0018
+			public const int btnCheckPasswordDialogCancel = 2131361816;
 			
-			// aapt resource value: 0x7f0a0047
-			public const int btnTracking = 2131361863;
-			
-			// aapt resource value: 0x7f0a0051
-			public const int btnTrailInfoDislike = 2131361873;
-			
-			// aapt resource value: 0x7f0a004f
-			public const int btnTrailInfoLike = 2131361871;
-			
-			// aapt resource value: 0x7f0a004c
-			public const int btnTrailInfoReport = 2131361868;
-			
-			// aapt resource value: 0x7f0a0055
-			public const int btnTrailSearchDialogCancel = 2131361877;
+			// aapt resource value: 0x7f0a0019
+			public const int btnCheckPasswordDialogConfirm = 2131361817;
 			
 			// aapt resource value: 0x7f0a0056
-			public const int btnTrailSearchDialogConfirm = 2131361878;
+			public const int btnConfirmSignUp = 2131361878;
 			
-			// aapt resource value: 0x7f0a005b
-			public const int btnTrailSubmitDialogCancel = 2131361883;
-			
-			// aapt resource value: 0x7f0a005c
-			public const int btnTrailSubmitDialogConfirm = 2131361884;
-			
-			// aapt resource value: 0x7f0a005e
-			public const int btnUserSearchDialogCancel = 2131361886;
-			
-			// aapt resource value: 0x7f0a005f
-			public const int btnUserSearchDialogConfirm = 2131361887;
-			
-			// aapt resource value: 0x7f0a0023
-			public const int buttonlogin = 2131361827;
+			// aapt resource value: 0x7f0a002e
+			public const int btnFriends = 2131361838;
 			
 			// aapt resource value: 0x7f0a002d
-			public const int cancel_action = 2131361837;
+			public const int btnLikedTrails = 2131361837;
 			
-			// aapt resource value: 0x7f0a0035
-			public const int chronometer = 2131361845;
+			// aapt resource value: 0x7f0a0020
+			public const int btnLikedTrailsDialogCancel = 2131361824;
+			
+			// aapt resource value: 0x7f0a002b
+			public const int btnSearchTrail = 2131361835;
+			
+			// aapt resource value: 0x7f0a002f
+			public const int btnSettings = 2131361839;
+			
+			// aapt resource value: 0x7f0a004d
+			public const int btnSettingsDialogCancel = 2131361869;
+			
+			// aapt resource value: 0x7f0a0022
+			public const int btnSignIn = 2131361826;
+			
+			// aapt resource value: 0x7f0a0024
+			public const int btnSignUp = 2131361828;
+			
+			// aapt resource value: 0x7f0a0058
+			public const int btnTracking = 2131361880;
+			
+			// aapt resource value: 0x7f0a005c
+			public const int btnTrackingCancel = 2131361884;
+			
+			// aapt resource value: 0x7f0a0062
+			public const int btnTrailInfoDislike = 2131361890;
+			
+			// aapt resource value: 0x7f0a0060
+			public const int btnTrailInfoLike = 2131361888;
+			
+			// aapt resource value: 0x7f0a0065
+			public const int btnTrailSearchDialogCancel = 2131361893;
+			
+			// aapt resource value: 0x7f0a0066
+			public const int btnTrailSearchDialogConfirm = 2131361894;
+			
+			// aapt resource value: 0x7f0a006b
+			public const int btnTrailSubmitDialogCancel = 2131361899;
+			
+			// aapt resource value: 0x7f0a006c
+			public const int btnTrailSubmitDialogConfirm = 2131361900;
+			
+			// aapt resource value: 0x7f0a0049
+			public const int btnUpdateEmail = 2131361865;
+			
+			// aapt resource value: 0x7f0a004c
+			public const int btnUpdatePassword = 2131361868;
+			
+			// aapt resource value: 0x7f0a0046
+			public const int btnUpdateUsername = 2131361862;
+			
+			// aapt resource value: 0x7f0a006e
+			public const int btnUserSearchDialogCancel = 2131361902;
+			
+			// aapt resource value: 0x7f0a006f
+			public const int btnUserSearchDialogConfirm = 2131361903;
+			
+			// aapt resource value: 0x7f0a0029
+			public const int buttonlogin = 2131361833;
+			
+			// aapt resource value: 0x7f0a0034
+			public const int cancel_action = 2131361844;
+			
+			// aapt resource value: 0x7f0a003c
+			public const int chronometer = 2131361852;
 			
 			// aapt resource value: 0x7f0a0010
 			public const int dark = 2131361808;
 			
-			// aapt resource value: 0x7f0a0044
-			public const int emailtext = 2131361860;
+			// aapt resource value: 0x7f0a0055
+			public const int emailtext = 2131361877;
 			
-			// aapt resource value: 0x7f0a003c
-			public const int end_padder = 2131361852;
+			// aapt resource value: 0x7f0a0043
+			public const int end_padder = 2131361859;
 			
 			// aapt resource value: 0x7f0a0014
 			public const int forever = 2131361812;
@@ -625,17 +652,17 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0005
 			public const int hybrid = 2131361797;
 			
-			// aapt resource value: 0x7f0a0037
-			public const int icon = 2131361847;
+			// aapt resource value: 0x7f0a003e
+			public const int icon = 2131361854;
 			
-			// aapt resource value: 0x7f0a003b
-			public const int icon_group = 2131361851;
+			// aapt resource value: 0x7f0a0042
+			public const int icon_group = 2131361858;
 			
 			// aapt resource value: 0x7f0a000c
 			public const int icon_only = 2131361804;
 			
-			// aapt resource value: 0x7f0a0036
-			public const int info = 2131361846;
+			// aapt resource value: 0x7f0a003d
+			public const int info = 2131361853;
 			
 			// aapt resource value: 0x7f0a0015
 			public const int italic = 2131361813;
@@ -649,23 +676,23 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0001
 			public const int line3 = 2131361793;
 			
-			// aapt resource value: 0x7f0a0017
-			public const int lvFriends = 2131361815;
+			// aapt resource value: 0x7f0a001b
+			public const int lvFriends = 2131361819;
 			
-			// aapt resource value: 0x7f0a001a
-			public const int lvLikedTrails = 2131361818;
+			// aapt resource value: 0x7f0a001f
+			public const int lvLikedTrails = 2131361823;
 			
-			// aapt resource value: 0x7f0a0057
-			public const int lvTrailSearchDialog = 2131361879;
+			// aapt resource value: 0x7f0a0067
+			public const int lvTrailSearchDialog = 2131361895;
 			
-			// aapt resource value: 0x7f0a0060
-			public const int lvUserSearchDialog = 2131361888;
+			// aapt resource value: 0x7f0a0070
+			public const int lvUserSearchDialog = 2131361904;
 			
-			// aapt resource value: 0x7f0a0024
-			public const int map = 2131361828;
+			// aapt resource value: 0x7f0a002a
+			public const int map = 2131361834;
 			
-			// aapt resource value: 0x7f0a002f
-			public const int media_actions = 2131361839;
+			// aapt resource value: 0x7f0a0036
+			public const int media_actions = 2131361846;
 			
 			// aapt resource value: 0x7f0a0006
 			public const int none = 2131361798;
@@ -673,41 +700,41 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0007
 			public const int normal = 2131361799;
 			
-			// aapt resource value: 0x7f0a0039
-			public const int notification_background = 2131361849;
-			
-			// aapt resource value: 0x7f0a0032
-			public const int notification_main_column = 2131361842;
-			
-			// aapt resource value: 0x7f0a0031
-			public const int notification_main_column_container = 2131361841;
-			
 			// aapt resource value: 0x7f0a0040
-			public const int passwordtext = 2131361856;
+			public const int notification_background = 2131361856;
 			
-			// aapt resource value: 0x7f0a0042
-			public const int repeatpasswordtext = 2131361858;
+			// aapt resource value: 0x7f0a0039
+			public const int notification_main_column = 2131361849;
 			
 			// aapt resource value: 0x7f0a0038
-			public const int right_icon = 2131361848;
+			public const int notification_main_column_container = 2131361848;
 			
-			// aapt resource value: 0x7f0a0033
-			public const int right_side = 2131361843;
+			// aapt resource value: 0x7f0a0051
+			public const int passwordtext = 2131361873;
+			
+			// aapt resource value: 0x7f0a0053
+			public const int repeatpasswordtext = 2131361875;
+			
+			// aapt resource value: 0x7f0a003f
+			public const int right_icon = 2131361855;
+			
+			// aapt resource value: 0x7f0a003a
+			public const int right_side = 2131361850;
 			
 			// aapt resource value: 0x7f0a0008
 			public const int satellite = 2131361800;
 			
-			// aapt resource value: 0x7f0a0022
-			public const int signinpassword = 2131361826;
+			// aapt resource value: 0x7f0a0028
+			public const int signinpassword = 2131361832;
 			
-			// aapt resource value: 0x7f0a0020
-			public const int signinusername = 2131361824;
+			// aapt resource value: 0x7f0a0026
+			public const int signinusername = 2131361830;
 			
 			// aapt resource value: 0x7f0a000d
 			public const int standard = 2131361805;
 			
-			// aapt resource value: 0x7f0a002e
-			public const int status_bar_latest_event_content = 2131361838;
+			// aapt resource value: 0x7f0a0035
+			public const int status_bar_latest_event_content = 2131361845;
 			
 			// aapt resource value: 0x7f0a0009
 			public const int terrain = 2131361801;
@@ -718,89 +745,110 @@ namespace Trail_Tracker
 			// aapt resource value: 0x7f0a0003
 			public const int text2 = 2131361795;
 			
-			// aapt resource value: 0x7f0a001b
-			public const int textCreateAccount = 2131361819;
-			
-			// aapt resource value: 0x7f0a001d
-			public const int textOR = 2131361821;
-			
-			// aapt resource value: 0x7f0a0053
-			public const int textTrailSearchDialogHeader = 2131361875;
-			
-			// aapt resource value: 0x7f0a0058
-			public const int textTrailSubmitDialogHeader = 2131361880;
-			
-			// aapt resource value: 0x7f0a0046
-			public const int textTrailTrackerHeader = 2131361862;
-			
-			// aapt resource value: 0x7f0a0041
-			public const int textconfirmpassword = 2131361857;
-			
-			// aapt resource value: 0x7f0a0043
-			public const int textemail = 2131361859;
-			
-			// aapt resource value: 0x7f0a003f
-			public const int textpassword = 2131361855;
-			
-			// aapt resource value: 0x7f0a003d
-			public const int textusername = 2131361853;
-			
 			// aapt resource value: 0x7f0a0021
-			public const int textviewpassword = 2131361825;
+			public const int textCreateAccount = 2131361825;
 			
-			// aapt resource value: 0x7f0a001f
-			public const int textviewusername = 2131361823;
+			// aapt resource value: 0x7f0a0047
+			public const int textEmail = 2131361863;
 			
-			// aapt resource value: 0x7f0a0034
-			public const int time = 2131361844;
+			// aapt resource value: 0x7f0a0023
+			public const int textOR = 2131361827;
+			
+			// aapt resource value: 0x7f0a004a
+			public const int textPassword = 2131361866;
+			
+			// aapt resource value: 0x7f0a0016
+			public const int textTrailSearchDialogHeader = 2131361814;
+			
+			// aapt resource value: 0x7f0a0068
+			public const int textTrailSubmitDialogHeader = 2131361896;
+			
+			// aapt resource value: 0x7f0a0057
+			public const int textTrailTrackerHeader = 2131361879;
+			
+			// aapt resource value: 0x7f0a0044
+			public const int textUsername = 2131361860;
+			
+			// aapt resource value: 0x7f0a0052
+			public const int textconfirmpassword = 2131361874;
+			
+			// aapt resource value: 0x7f0a0054
+			public const int textemail = 2131361876;
+			
+			// aapt resource value: 0x7f0a0050
+			public const int textpassword = 2131361872;
+			
+			// aapt resource value: 0x7f0a004e
+			public const int textusername = 2131361870;
+			
+			// aapt resource value: 0x7f0a0027
+			public const int textviewpassword = 2131361831;
+			
+			// aapt resource value: 0x7f0a0025
+			public const int textviewusername = 2131361829;
+			
+			// aapt resource value: 0x7f0a003b
+			public const int time = 2131361851;
 			
 			// aapt resource value: 0x7f0a0004
 			public const int title = 2131361796;
 			
-			// aapt resource value: 0x7f0a004a
-			public const int txtDistance = 2131361866;
+			// aapt resource value: 0x7f0a005b
+			public const int txtDistance = 2131361883;
 			
-			// aapt resource value: 0x7f0a0016
-			public const int txtFriendsDialogHeader = 2131361814;
-			
-			// aapt resource value: 0x7f0a0048
-			public const int txtLatitude = 2131361864;
-			
-			// aapt resource value: 0x7f0a0019
-			public const int txtLikedTrailsDialogHeader = 2131361817;
-			
-			// aapt resource value: 0x7f0a0049
-			public const int txtLongitude = 2131361865;
-			
-			// aapt resource value: 0x7f0a0052
-			public const int txtTrailDislikes = 2131361874;
-			
-			// aapt resource value: 0x7f0a004d
-			public const int txtTrailLength = 2131361869;
-			
-			// aapt resource value: 0x7f0a0050
-			public const int txtTrailLikes = 2131361872;
-			
-			// aapt resource value: 0x7f0a004b
-			public const int txtTrailName = 2131361867;
-			
-			// aapt resource value: 0x7f0a005a
-			public const int txtTrailSubmitDialogLength = 2131361882;
-			
-			// aapt resource value: 0x7f0a004e
-			public const int txtTrailUsername = 2131361870;
+			// aapt resource value: 0x7f0a001a
+			public const int txtFriendsDialogHeader = 2131361818;
 			
 			// aapt resource value: 0x7f0a0059
-			public const int txtboxTrailName = 2131361881;
+			public const int txtLatitude = 2131361881;
 			
-			// aapt resource value: 0x7f0a0054
-			public const int txtboxTrailSearch = 2131361876;
+			// aapt resource value: 0x7f0a001e
+			public const int txtLikedTrailsDialogHeader = 2131361822;
+			
+			// aapt resource value: 0x7f0a005a
+			public const int txtLongitude = 2131361882;
+			
+			// aapt resource value: 0x7f0a0063
+			public const int txtTrailDislikes = 2131361891;
+			
+			// aapt resource value: 0x7f0a005e
+			public const int txtTrailLength = 2131361886;
+			
+			// aapt resource value: 0x7f0a0061
+			public const int txtTrailLikes = 2131361889;
 			
 			// aapt resource value: 0x7f0a005d
-			public const int txtboxUserSearch = 2131361885;
+			public const int txtTrailName = 2131361885;
 			
-			// aapt resource value: 0x7f0a003e
-			public const int usernametext = 2131361854;
+			// aapt resource value: 0x7f0a006a
+			public const int txtTrailSubmitDialogLength = 2131361898;
+			
+			// aapt resource value: 0x7f0a005f
+			public const int txtTrailUsername = 2131361887;
+			
+			// aapt resource value: 0x7f0a0017
+			public const int txtboxCheckPassword = 2131361815;
+			
+			// aapt resource value: 0x7f0a0069
+			public const int txtboxTrailName = 2131361897;
+			
+			// aapt resource value: 0x7f0a0064
+			public const int txtboxTrailSearch = 2131361892;
+			
+			// aapt resource value: 0x7f0a0048
+			public const int txtboxUpdateEmail = 2131361864;
+			
+			// aapt resource value: 0x7f0a004b
+			public const int txtboxUpdatePassword = 2131361867;
+			
+			// aapt resource value: 0x7f0a0045
+			public const int txtboxUpdateUsername = 2131361861;
+			
+			// aapt resource value: 0x7f0a006d
+			public const int txtboxUserSearch = 2131361901;
+			
+			// aapt resource value: 0x7f0a004f
+			public const int usernametext = 2131361871;
 			
 			// aapt resource value: 0x7f0a000e
 			public const int wide = 2131361806;
@@ -841,82 +889,88 @@ namespace Trail_Tracker
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int FriendsDialog = 2130903040;
+			public const int CheckPasswordDialog = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int LikedTrailsDialog = 2130903041;
+			public const int FriendsDialog = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int Login = 2130903042;
+			public const int LikedTrailsDialog = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int LoginDialog = 2130903043;
+			public const int Login = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Map = 2130903044;
+			public const int LoginDialog = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int notification_action = 2130903045;
+			public const int Map = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int notification_action_tombstone = 2130903046;
+			public const int notification_action = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int notification_media_action = 2130903047;
+			public const int notification_action_tombstone = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int notification_media_cancel_action = 2130903048;
+			public const int notification_media_action = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int notification_template_big_media = 2130903049;
+			public const int notification_media_cancel_action = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int notification_template_big_media_custom = 2130903050;
+			public const int notification_template_big_media = 2130903050;
 			
 			// aapt resource value: 0x7f03000b
-			public const int notification_template_big_media_narrow = 2130903051;
+			public const int notification_template_big_media_custom = 2130903051;
 			
 			// aapt resource value: 0x7f03000c
-			public const int notification_template_big_media_narrow_custom = 2130903052;
+			public const int notification_template_big_media_narrow = 2130903052;
 			
 			// aapt resource value: 0x7f03000d
-			public const int notification_template_custom_big = 2130903053;
+			public const int notification_template_big_media_narrow_custom = 2130903053;
 			
 			// aapt resource value: 0x7f03000e
-			public const int notification_template_icon_group = 2130903054;
+			public const int notification_template_custom_big = 2130903054;
 			
 			// aapt resource value: 0x7f03000f
-			public const int notification_template_lines_media = 2130903055;
+			public const int notification_template_icon_group = 2130903055;
 			
 			// aapt resource value: 0x7f030010
-			public const int notification_template_media = 2130903056;
+			public const int notification_template_lines_media = 2130903056;
 			
 			// aapt resource value: 0x7f030011
-			public const int notification_template_media_custom = 2130903057;
+			public const int notification_template_media = 2130903057;
 			
 			// aapt resource value: 0x7f030012
-			public const int notification_template_part_chronometer = 2130903058;
+			public const int notification_template_media_custom = 2130903058;
 			
 			// aapt resource value: 0x7f030013
-			public const int notification_template_part_time = 2130903059;
+			public const int notification_template_part_chronometer = 2130903059;
 			
 			// aapt resource value: 0x7f030014
-			public const int SignUpDialog = 2130903060;
+			public const int notification_template_part_time = 2130903060;
 			
 			// aapt resource value: 0x7f030015
-			public const int Tracking = 2130903061;
+			public const int SettingsDialog = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int TrailInfoDialog = 2130903062;
+			public const int SignUpDialog = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int TrailSearchDialog = 2130903063;
+			public const int Tracking = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int TrailSubmitDialog = 2130903064;
+			public const int TrailInfoDialog = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int UserSearchDialog = 2130903065;
+			public const int TrailSearchDialog = 2130903065;
+			
+			// aapt resource value: 0x7f03001a
+			public const int TrailSubmitDialog = 2130903066;
+			
+			// aapt resource value: 0x7f03001b
+			public const int UserSearchDialog = 2130903067;
 			
 			static Layout()
 			{

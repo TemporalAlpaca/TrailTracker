@@ -19,6 +19,7 @@ namespace Trail_Tracker
     {
         int m_userID;
         string m_username;
+        Button btnCancel;
         ListView lvLikedTrails;
         TextView txtLikedTrailsDialogHeader;
         List<Trail> Trails;
@@ -58,6 +59,9 @@ namespace Trail_Tracker
             lvLikedTrails = view.FindViewById<ListView>(Resource.Id.lvLikedTrails);
             FillFavorites();
 
+            btnCancel = view.FindViewById<Button>(Resource.Id.btnLikedTrailsDialogCancel);
+            btnCancel.Click += BtnCancel_Click;
+
             if (m_username != "")
                 txtLikedTrailsDialogHeader.Text = m_username + "'s liked trails:";
 
@@ -65,6 +69,11 @@ namespace Trail_Tracker
 
             builder.SetView(view);
             return builder.Create();
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Dismiss();
         }
 
         private void FillFavorites()

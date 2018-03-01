@@ -66,9 +66,13 @@ namespace Trail_Tracker
                     Intent mapIntent = new Intent(this.Activity, typeof(MapActivity));
                     mapIntent.PutExtra("User", user.m_username + "," + user.m_email);
                     this.Activity.StartActivity(mapIntent);
+                    Dismiss();
                 }
+                else
+                    Toast.MakeText(this.Context, "Login Failed!", ToastLength.Long).Show();
+
             }
-            
+
         }
     }
 }

@@ -363,5 +363,114 @@ namespace Trail_Tracker.Helpers
                 return false;
             }
         }
+
+        public bool Check_Pass(int userID, string password)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("CHECK_PASS", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = userID;
+                        cmd.Parameters.Add("@PASSWORD", SqlDbType.VarChar).Value = password;
+
+                        con.Open();
+                        DataSet ds = new DataSet("PasswordCheck");
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        da.SelectCommand = cmd;
+
+                        da.Fill(ds);
+
+                        if (ds.Tables[0].Rows.Count == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
+        public bool Update_Username(User user, string new_username)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("UPDATE_USERNAME", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = user.m_id;
+                        cmd.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = new_username;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            return true;
+        }
+
+        public bool Update_Password(User user, string new_pass)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("UPDATE_PASSWORD", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = user.m_id;
+                        cmd.Parameters.Add("@PASSWORD", SqlDbType.VarChar).Value = new_pass;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            return true;
+        }
+
+        public bool Update_Email(User user, string new_email)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connection))
+                {
+                    using (SqlCommand cmd = new SqlCommand("UPDATE_EMAIL", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@USERID", SqlDbType.Int).Value = user.m_id;
+                        cmd.Parameters.Add("@EMAIL", SqlDbType.VarChar).Value = user.m_email;
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            return true;
+        }
     }
 }

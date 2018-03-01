@@ -19,7 +19,7 @@ namespace Trail_Tracker
     [Activity(Label = "TrackingActivity")]
     public class MainActivity : BaseActivity, ILocationListener
     {
-        Button btnTracking;
+        Button btnTracking, btnTrackingCancel;
   
         TextView txtLatitude;
         TextView txtLongitude;
@@ -46,11 +46,19 @@ namespace Trail_Tracker
             btnTracking = FindViewById<Button>(Resource.Id.btnTracking);
             btnTracking.Click += BtnStartTracking_Click;
 
+            btnTrackingCancel = FindViewById<Button>(Resource.Id.btnTrackingCancel);
+            btnTrackingCancel.Click += BtnTrackingCancel_Click;
+
             txtLatitude = FindViewById<TextView>(Resource.Id.txtLatitude);
             txtLongitude = FindViewById<TextView>(Resource.Id.txtLongitude);
             txtDistance = FindViewById<TextView>(Resource.Id.txtDistance);
 
             m_username = this.Intent.GetStringExtra("User");
+        }
+
+        private void BtnTrackingCancel_Click(object sender, EventArgs e)
+        {
+            Finish();
         }
 
         private void BtnStopTracking_Click(object sender, System.EventArgs e)

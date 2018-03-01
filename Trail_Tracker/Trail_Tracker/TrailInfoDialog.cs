@@ -21,7 +21,7 @@ namespace Trail_Tracker
     {
         private string m_trailname, m_length, m_username, m_current_user;
         private TextView txtTrailName, txtTrailLength, txtTrailUsername, txtTrailLikes, txtTrailDislikes;
-        private Button btnReport, btnLike, btnDislike;
+        private Button /*btnReport,*/ btnLike, btnDislike;
         private int m_trailID, m_likes, m_dislikes, m_userID;
         private bool m_rated = false;
 
@@ -74,9 +74,9 @@ namespace Trail_Tracker
             btnLike.Background.SetColorFilter(Color.Green, PorterDuff.Mode.Multiply);
             btnLike.Click += BtnLike_Click;
 
-            btnReport = view.FindViewById<Button>(Resource.Id.btnTrailInfoReport);
-            btnReport.Background.SetColorFilter(Color.DarkRed, PorterDuff.Mode.Multiply);
-            btnReport.Click += BtnReport_Click;
+            //btnReport = view.FindViewById<Button>(Resource.Id.btnTrailInfoReport);
+            //btnReport.Background.SetColorFilter(Color.DarkRed, PorterDuff.Mode.Multiply);
+            //btnReport.Click += BtnReport_Click;
 
             DataAccess da = new DataAccess();
 
@@ -92,9 +92,9 @@ namespace Trail_Tracker
             return builder.Create();
         }
 
-        private void BtnReport_Click(object sender, EventArgs e)
-        {
-        }
+        //private void BtnReport_Click(object sender, EventArgs e)
+        //{
+        //}
 
         private void BtnLike_Click(object sender, EventArgs e)
         {

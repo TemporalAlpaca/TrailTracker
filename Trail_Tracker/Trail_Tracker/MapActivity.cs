@@ -30,7 +30,7 @@ namespace Trail_Tracker
     {
         MapFragment _mapFragment;
         GoogleMap _map;
-        Button btnAddTrail, btnLiked, btnSearch, btnFriends;
+        Button btnAddTrail, btnLiked, btnSearch, btnFriends, btnSettings;
         LocationManager locMgr;
         Location loc;
         LatLng latlng;
@@ -144,6 +144,9 @@ namespace Trail_Tracker
 
             btnFriends = FindViewById<Button>(Resource.Id.btnFriends);
             btnFriends.Click += BtnFriends_Click;
+
+            btnSettings = FindViewById<Button>(Resource.Id.btnSettings);
+            btnSettings.Click += BtnSettings_Click;
         }
 
         private void SetCamera()
@@ -377,6 +380,15 @@ namespace Trail_Tracker
             dialogFragment.Show(transaction, "LikedTrails_Dialog");
         }
 
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            CheckPasswordDialog dialogFragment = new CheckPasswordDialog(m_userID, m_username, m_email);
+
+            dialogFragment.Show(transaction, "Settings_Dialog");
+        }
+
         private void CheckLocationPermissions()
         {
             string permission = Manifest.Permission.AccessFineLocation;
@@ -392,6 +404,8 @@ namespace Trail_Tracker
         {
             TrailList.Clear();
             PathList.Clear();
+            _map.Clear();
+            LoadTrails();
         }
 
         public void GetCoord(string coord)
@@ -423,6 +437,12 @@ namespace Trail_Tracker
                     _map.MoveCamera(cameraUpdate);
                 }
             }
+        }
+
+        public void UpdateUserInfo(User user)
+        {
+            m_username = user.m_username;
+            m_email = user.m_email;
         }
 
         public bool OnMarkerClick(Marker marker)

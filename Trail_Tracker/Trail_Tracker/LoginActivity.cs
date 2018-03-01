@@ -54,6 +54,7 @@ namespace Trail_Tracker
         private void CheckLocationPermissions()
         {
             string permission = Manifest.Permission.AccessFineLocation;
+
             if (this.CheckSelfPermission(permission) != (int)Permission.Granted)
             {
                 string[] request_permissions = new string[1];

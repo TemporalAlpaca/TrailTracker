@@ -16,6 +16,17 @@
   <ListView
       android:id="@+id/lvLikedTrails"
       android:layout_width="fill_parent"
-      android:layout_weight="92"
+      android:layout_weight="84"
       android:layout_height="0dp" />
+  <Button
+    android:id="@+id/btnLikedTrailsDialogCancel"
+    android:text="Back to map"
+    android:layout_gravity="center"
+    android:layout_width="400dp"
+    android:layout_height="25dp"
+    android:layout_weight="8"
+    android:layout_marginTop="25px"
+    android:layout_marginLeft="15px"
+    android:layout_marginRight="15px"
+    android:textSize="15sp"/>
 </LinearLayout>
